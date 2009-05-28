@@ -95,6 +95,7 @@ create table MIEMBROFORMULARIO(
     IDTipoCampo int,
     IDCampo int,
     tabIndex int,
+    estiloLetra varchar(10),
     primary key(correlativo),
 	CONSTRAINT Miembro_Formulario_IDFormulario
         FOREIGN KEY(IDFormulario)		REFERENCES FORMULARIO(correlativo)

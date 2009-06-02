@@ -99,3 +99,27 @@ create table MIEMBROFORMULARIO(
         FOREIGN KEY(IDFormulario)		REFERENCES FORMULARIO(correlativo)
             ON DELETE CASCADE
 );
+
+
+drop table Comando
+CREATE TABLE Comando(
+  ID					int  auto_increment NOT NULL,
+  IDFormulario			int NOT NULL,
+  Nombre				varchar(50) NOT NULL,
+  Descripcion			varchar(50) NOT NULL,
+  Tipo					int NOT NULL,
+  IDFormularioATrabajar int,
+  FechaActualizacion		varchar(50) NOT NULL,
+  PRIMARY KEY (ID)
+);
+
+drop table CompandoMascara
+CREATE TABLE CompandoMascara(
+  ID						int  auto_increment NOT NULL,
+  IDComando					int NOT NULL,
+  TipoCampoInicial			varchar(50) NOT NULL,
+  CondicionInicial			varchar(50) NOT NULL,
+  TipoCampoFinal			varchar(50) NOT NULL,
+  EstadoFinal				varchar(50) NOT NULL,
+  PRIMARY KEY (ID)
+);

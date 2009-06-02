@@ -11,6 +11,9 @@
 
 package gestiontipocampo;
 
+import java.sql.ResultSet;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Ricardo
@@ -20,6 +23,27 @@ public class frameComandos extends javax.swing.JFrame {
     /** Creates new form frameComandos */
     public frameComandos() {
         initComponents();
+        ControladorBD miPrueba = new ControladorBD();
+        javax.swing.DefaultComboBoxModel modelo = new javax.swing.DefaultComboBoxModel( );
+        modelo = (DefaultComboBoxModel) comboSeleccionFormulario.getModel();
+
+       /* Object[] fila = new Object[4];
+        //       madre.setVisible(false);
+        try {
+            ResultSet resultado = miPrueba.getResultSet("select * from FORMULARIO where nombre like '%" + argumentoBusqueda + "%' or descripcion like '%" + argumentoBusqueda + "%';");
+            while (resultado.next()) {
+                for (int i = 0; i < 4; i++) {
+                    fila[i] = resultado.getObject(i + 1).toString();
+                }
+                modelo.addRow(fila);
+            }
+            tablaBusqueda.setModel(modelo);
+
+        } catch (SQLException e) {
+            System.out.println("*SQL Exception: *" + e.toString());
+        }*/
+
+        /*comboSeleccionFormulario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));*/
     }
 
     /** This method is called from within the constructor to
@@ -79,7 +103,7 @@ public class frameComandos extends javax.swing.JFrame {
         labelTipo.setText(resourceMap.getString("labelTipo.text")); // NOI18N
         labelTipo.setName("labelTipo"); // NOI18N
 
-        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Crear", "Eliminar", "Modificar", "Otro" }));
         comboTipo.setName("comboTipo"); // NOI18N
 
         labelDescripcion.setLabelFor(fieldDescripcion);
@@ -99,7 +123,7 @@ public class frameComandos extends javax.swing.JFrame {
 
         comboAccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboAccion.setName("comboAccion"); // NOI18N
-        comboAccion.setBounds(0, 0, 150, 20);
+        comboAccion.setBounds(0, 0, 150, -1);
         paneAccionCombo.add(comboAccion, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         paneAccionCombo.setBounds(0, 0, 150, 50);
@@ -109,7 +133,7 @@ public class frameComandos extends javax.swing.JFrame {
 
         fieldAccion.setText(resourceMap.getString("fieldAccion.text")); // NOI18N
         fieldAccion.setName("fieldAccion"); // NOI18N
-        fieldAccion.setBounds(0, 0, 150, 20);
+        fieldAccion.setBounds(0, 0, 150, -1);
         paneAccionField.add(fieldAccion, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         paneAccionField.setBounds(0, 0, 160, 50);
@@ -121,23 +145,23 @@ public class frameComandos extends javax.swing.JFrame {
         labelCampoInicial.setLabelFor(comboCampoInicial);
         labelCampoInicial.setText(resourceMap.getString("labelCampoInicial.text")); // NOI18N
         labelCampoInicial.setName("labelCampoInicial"); // NOI18N
-        labelCampoInicial.setBounds(20, 40, 100, 14);
+        labelCampoInicial.setBounds(20, 40, 100, -1);
         paneComandoMascara.add(labelCampoInicial, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         labelCondicionInicial.setText(resourceMap.getString("labelCondicionInicial.text")); // NOI18N
         labelCondicionInicial.setName("labelCondicionInicial"); // NOI18N
-        labelCondicionInicial.setBounds(80, 20, 80, 14);
+        labelCondicionInicial.setBounds(80, 20, 80, -1);
         paneComandoMascara.add(labelCondicionInicial, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         comboCampoInicial.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboCampoInicial.setName("comboCampoInicial"); // NOI18N
-        comboCampoInicial.setBounds(20, 60, 130, 20);
+        comboCampoInicial.setBounds(20, 60, 130, -1);
         paneComandoMascara.add(comboCampoInicial, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         labelCondAccion.setLabelFor(paneDivisionAccion);
         labelCondAccion.setText(resourceMap.getString("labelCondAccion.text")); // NOI18N
         labelCondAccion.setName("labelCondAccion"); // NOI18N
-        labelCondAccion.setBounds(180, 40, 100, 14);
+        labelCondAccion.setBounds(180, 40, 100, -1);
         paneComandoMascara.add(labelCondAccion, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         paneDivisionEfecto.setName("paneDivisionEfecto"); // NOI18N
@@ -146,7 +170,7 @@ public class frameComandos extends javax.swing.JFrame {
 
         comboEfecto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboEfecto.setName("comboEfecto"); // NOI18N
-        comboEfecto.setBounds(0, 0, 150, 20);
+        comboEfecto.setBounds(0, 0, 150, -1);
         paneEfectoCombo.add(comboEfecto, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         paneEfectoCombo.setBounds(0, 0, 150, 50);
@@ -155,7 +179,7 @@ public class frameComandos extends javax.swing.JFrame {
         paneEfectoField.setName("paneEfectoField"); // NOI18N
 
         fieldEfecto.setName("fieldEfecto"); // NOI18N
-        fieldEfecto.setBounds(0, 0, 150, 20);
+        fieldEfecto.setBounds(0, 0, 150, -1);
         paneEfectoField.add(fieldEfecto, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         paneEfectoField.setBounds(0, 0, 160, 50);
@@ -167,28 +191,28 @@ public class frameComandos extends javax.swing.JFrame {
         labelCampoFinal.setLabelFor(comboCampoInicial);
         labelCampoFinal.setText(resourceMap.getString("labelCampoFinal.text")); // NOI18N
         labelCampoFinal.setName("labelCampoFinal"); // NOI18N
-        labelCampoFinal.setBounds(340, 40, 100, 14);
+        labelCampoFinal.setBounds(340, 40, 100, -1);
         paneComandoMascara.add(labelCampoFinal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         labelCondicionInicial1.setText(resourceMap.getString("labelCondicionInicial1.text")); // NOI18N
         labelCondicionInicial1.setName("labelCondicionInicial1"); // NOI18N
-        labelCondicionInicial1.setBounds(400, 20, 80, 14);
+        labelCondicionInicial1.setBounds(400, 20, 80, -1);
         paneComandoMascara.add(labelCondicionInicial1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         comboCampoFinal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboCampoFinal.setName("comboCampoFinal"); // NOI18N
-        comboCampoFinal.setBounds(340, 60, 130, 20);
+        comboCampoFinal.setBounds(340, 60, 130, -1);
         paneComandoMascara.add(comboCampoFinal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         labelCondFinal.setLabelFor(paneDivisionAccion);
         labelCondFinal.setText(resourceMap.getString("labelCondFinal.text")); // NOI18N
         labelCondFinal.setName("labelCondFinal"); // NOI18N
-        labelCondFinal.setBounds(500, 40, 100, 14);
+        labelCondFinal.setBounds(500, 40, 100, -1);
         paneComandoMascara.add(labelCondFinal, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         botonAgregarAccion.setText(resourceMap.getString("botonAgregarAccion.text")); // NOI18N
         botonAgregarAccion.setName("botonAgregarAccion"); // NOI18N
-        botonAgregarAccion.setBounds(563, 210, 110, 23);
+        botonAgregarAccion.setBounds(563, 210, 110, -1);
         paneComandoMascara.add(botonAgregarAccion, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         paneComandoMascara.setBounds(10, 20, 680, 240);
@@ -199,12 +223,12 @@ public class frameComandos extends javax.swing.JFrame {
         labelSeleccionFormulario.setLabelFor(comboSeleccionFormulario);
         labelSeleccionFormulario.setText(resourceMap.getString("labelSeleccionFormulario.text")); // NOI18N
         labelSeleccionFormulario.setName("labelSeleccionFormulario"); // NOI18N
-        labelSeleccionFormulario.setBounds(10, 10, 180, 14);
+        labelSeleccionFormulario.setBounds(10, 10, 180, -1);
         paneComandosFaciles.add(labelSeleccionFormulario, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        comboSeleccionFormulario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboSeleccionFormulario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         comboSeleccionFormulario.setName("comboSeleccionFormulario"); // NOI18N
-        comboSeleccionFormulario.setBounds(10, 30, 180, 20);
+        comboSeleccionFormulario.setBounds(10, 30, 180, -1);
         paneComandosFaciles.add(comboSeleccionFormulario, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         paneComandosFaciles.setBounds(20, 30, 680, 220);

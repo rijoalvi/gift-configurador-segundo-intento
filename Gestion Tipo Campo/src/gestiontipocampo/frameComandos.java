@@ -12,6 +12,7 @@
 package gestiontipocampo;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -28,22 +29,22 @@ public class frameComandos extends javax.swing.JFrame {
         javax.swing.DefaultComboBoxModel modelo = new javax.swing.DefaultComboBoxModel( );
         modelo = (DefaultComboBoxModel) comboSeleccionFormulario.getModel();
 
-       /* Object[] fila = new Object[4];
-        //       madre.setVisible(false);
+
+
+        paneComandosFaciles.setVisible(true);
+        
+       
         try {
-            ResultSet resultado = miPrueba.getResultSet("select * from FORMULARIO where nombre like '%" + argumentoBusqueda + "%' or descripcion like '%" + argumentoBusqueda + "%';");
+            ResultSet resultado = miPrueba.getResultSet("select correlativo, nombre from FORMULARIO;");
             while (resultado.next()) {
-                for (int i = 0; i < 4; i++) {
-                    fila[i] = resultado.getObject(i + 1).toString();
-                }
-                modelo.addRow(fila);
+                modelo.addElement(resultado.getObject(1).toString()+"\t"+resultado.getObject(2).toString());
             }
-            tablaBusqueda.setModel(modelo);
 
         } catch (SQLException e) {
             System.out.println("*SQL Exception: *" + e.toString());
-        }*/
-
+        }
+        comboSeleccionFormulario.setModel(modelo);
+        comboSeleccionFormulario.setVisible(true);
         /*comboSeleccionFormulario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));*/
     }
 
@@ -224,12 +225,12 @@ public class frameComandos extends javax.swing.JFrame {
         labelSeleccionFormulario.setLabelFor(comboSeleccionFormulario);
         labelSeleccionFormulario.setText(resourceMap.getString("labelSeleccionFormulario.text")); // NOI18N
         labelSeleccionFormulario.setName("labelSeleccionFormulario"); // NOI18N
-        labelSeleccionFormulario.setBounds(10, 10, 180, -1);
+        labelSeleccionFormulario.setBounds(20, 10, 180, 14);
         paneComandosFaciles.add(labelSeleccionFormulario, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         comboSeleccionFormulario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         comboSeleccionFormulario.setName("comboSeleccionFormulario"); // NOI18N
-        comboSeleccionFormulario.setBounds(10, 30, 180, -1);
+        comboSeleccionFormulario.setBounds(20, 30, 180, 20);
         paneComandosFaciles.add(comboSeleccionFormulario, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         paneComandosFaciles.setBounds(20, 30, 680, 220);

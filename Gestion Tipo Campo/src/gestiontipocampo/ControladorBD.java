@@ -193,4 +193,14 @@ public class ControladorBD {
         }
         return consulta;
     }
+
+    public ConsultaComando getConsultaComando() {
+        ConsultaComando consulta;
+        if (CONEXION_MYSQL == conexionSeleccionada) {
+            consulta = new ConsultaComando();//por ahora solo tengo uno
+        } else {
+            consulta = new ConsultaComando();
+        }
+        return consulta;
+    }
 }

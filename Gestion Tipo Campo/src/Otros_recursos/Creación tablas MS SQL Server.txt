@@ -110,7 +110,7 @@ CREATE TABLE Comando(
   Descripcion			varchar(50) NOT NULL,
   Tipo					int NOT NULL,
   IDFormularioATrabajar int,
-  FechaATrabajar		varchar(50) NOT NULL,
+  FechaActualizacion		varchar(50) NOT NULL,
   PRIMARY KEY (ID)
 );
 

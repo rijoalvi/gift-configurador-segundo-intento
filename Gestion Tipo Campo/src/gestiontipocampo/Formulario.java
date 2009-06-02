@@ -31,7 +31,7 @@ public class Formulario{
         this.nombre = nombre;
         this.descripcion = desc;
         buscador = new ControladorBD();
-        formBD = buscador.getConsultaFormulario();;
+        formBD = buscador.getConsultaFormulario();
         this.correlativo = formBD.guardaFormulario(nombre, descripcion);
         miembrosFormulario = new TreeSet();
     }

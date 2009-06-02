@@ -13,7 +13,7 @@ public class Comando {
     protected String nombreComando; //El nombre del comando
     protected int tipoComando;      //El tipo (creacion, con mascara, etc)
     protected String descripcion;   //La descripcion
-    protected boolean facilDificil; //Aqui diferenciamos si es con mascara o es de los faciles
+    protected boolean facilDificil; //Aqui diferenciamos si es con mascara o es de los faciles. Si es facil es true, si es con mascara es false
 
     //ESTA ES LA OPCIÓN DE COMANDOS DE CREAR, BORRAR O MODIFICAR
     protected String formDestino;   //El formulario que voy a crear/borrar/modificar (si es el caso)
@@ -40,7 +40,19 @@ public class Comando {
     }
 
     public void setTipoComando(int tipo){
+        /*OJO: Orden de los comandos:
+         1 - Comando de Crear
+         2 - Comando de borrar
+         3 - COmando de Modificar
+         4 - Comando con Máscara
+         */
         this.tipoComando = tipo;
+        if(tipoComando!=4{
+            facilDificil=true;
+        }
+        else{
+            facilDificil=false;
+        }
     }
 
     public void setDescripcion(String desc){
@@ -97,5 +109,9 @@ public class Comando {
 
     public String getCondicionFinal(){
         return(this.condicionFinal);
+    }
+
+    public boolean getFacilDificil(){
+        return(this.facilDificil);
     }
 }

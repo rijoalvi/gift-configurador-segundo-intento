@@ -7,7 +7,6 @@ package gestiontipocampo;
 
 import java.sql.*;
 import javax.swing.tree.*;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -15,11 +14,9 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.*;
 import javax.swing.JColorChooser;
 import java.awt.Color;
-import java.awt.FocusTraversalPolicy;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.util.*;
-import javax.swing.text.DefaultFormatterFactory;
 
 /**
  *

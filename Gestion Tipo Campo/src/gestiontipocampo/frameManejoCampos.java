@@ -12,7 +12,6 @@ import javax.swing.JOptionPane;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import java.text.ParseException;
-
 import java.text.SimpleDateFormat;
 
 /**
@@ -34,12 +33,14 @@ public class frameManejoCampos extends javax.swing.JFrame {
     /** Creates new form frameManejoCampos */
     public frameManejoCampos() {
         initComponents();
+        postInitComponents();
         ocultarPanes();
     }
 
     /** Creates new form frameManejoCampos */
     public frameManejoCampos(String tipo) {
         initComponents();
+        postInitComponents();
         ocultarPanes();
         //Se revisa si se debe abrir con algun valor o si es para ingresar valores nuevos
         if (tipo.equalsIgnoreCase("nuevo")) {
@@ -65,6 +66,7 @@ public class frameManejoCampos extends javax.swing.JFrame {
      */
     public frameManejoCampos(String[] valGenerales, String[] valEspecificos) {
         initComponents();
+        postInitComponents();
         panePrincipal.setVisible(true);
         int tipo = Integer.parseInt(valGenerales[4]);
         comboTipos.setSelectedIndex(tipo);
@@ -235,9 +237,6 @@ public class frameManejoCampos extends javax.swing.JFrame {
         botonBorrar = new javax.swing.JButton();
         botonCerrar = new javax.swing.JButton();
         comboTipos = new javax.swing.JComboBox();
-        botonGuardar1 = new javax.swing.JButton();
-        botonGuardarComo1 = new javax.swing.JButton();
-        botonBorrar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(gestiontipocampo.GestionTipoCampoApp.class).getContext().getResourceMap(frameManejoCampos.class);
@@ -511,7 +510,7 @@ public class frameManejoCampos extends javax.swing.JFrame {
 
         jLabel15.setText(resourceMap.getString("jLabel15.text")); // NOI18N
         jLabel15.setName("jLabel15"); // NOI18N
-        jLabel15.setBounds(10, 50, 90, 20);
+        jLabel15.setBounds(10, 50, 100, 20);
         paneFechaHora.add(jLabel15, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         radioFechaHoraSi.setSelected(true);
@@ -761,19 +760,97 @@ public class frameManejoCampos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
+     * Inicializa los componentes para que no se desaparezcan.
+     */
+    private void postInitComponents() {
+
+        jLabel1.setSize(135, 14);
+        jLabel20.setSize(36, 14);
+        valorBusqueda.setSize(105, 20);
+        botonBusqueda.setSize(50, 20);
+        jLabel2.setSize(41, 14);
+        jLabel3.setSize(58, 14);
+        valorNombreGeneral.setSize(100, 20);
+        valorNota.setSize(200, 20);
+        panePrincipal.setSize(530, 162);
+        paneJerarquia.setSize(480, 160);
+        labelCategorias.setSize(60, 14);
+        comboCategorias.setSize(130, 20);
+        botonAgregarCategoria.setSize(140, 23);
+        radioNivelesSi.setSize(33, 23);
+        radioNivelesNo.setSize(50, 23);
+        jLabel21.setSize(130, 14);
+        radioCategoriasSi.setSize(33, 23);
+        radioCategoriasNo.setSize(50, 23);
+        jLabel22.setSize(80, 14);
+        radioNomUnicoSi.setSize(33, 23);
+        radioNomUnicoNo.setSize(50, 23);
+        jLabel23.setSize(70, 14);
+        jLabel24.setSize(34, 14);
+        comboNiveles.setSize(130, 20);
+        botonAgregarNivel.setSize(140, 23);
+        paneBinario.setSize(400, 160);
+        jLabel7.setSize(100, 20);
+        valorNombreBinario1.setSize(100, 20);
+        jLabel8.setSize(100, 20);
+        valorOpcionBinaria1.setSize(100, 20);
+        jLabel9.setSize(100, 20);
+        jLabel10.setSize(100, 20);
+        valorNombreBinario2.setSize(100, 20);
+        jLabel11.setSize(100, 20);
+        valorOpcionBinaria2.setSize(100, 20);
+        radioOpcionBinaria1.setSize(100, 20);
+        radioOpcionBinaria2.setSize(100, 20);
+        paneFechaHora.setSize(380, 130);
+        jLabel6.setSize(100, 14);
+        valorPreaviso.setSize(80, 20);
+        jLabel13.setSize(100, 14);
+        valorFechaDefecto.setSize(80, 20);
+        jLabel14.setSize(100, 14);
+        jLabel15.setSize(100, 14);
+        radioFechaHoraSi.setSize(33, 23);
+        radioFechaHoraNo.setSize(39, 23);
+        comboFormatoFecha.setSize(90, 20);
+        paneTexto.setSize(360, 130);
+        jLabel16.setSize(100, 20);
+        valorTextoLargo.setSize(100, 20);
+        jLabel18.setSize(100, 20);
+        valorTextoDefecto.setSize(100, 20);
+        paneIncremental.setSize(360, 130);
+        jLabel17.setSize(100, 20);
+        valorValorInicial.setSize(100, 20);
+        jLabel19.setSize(100, 20);
+        valorIncremento.setSize(100, 20);
+        paneNumero.setSize(400, 160);
+        jLabel4.setSize(110, 20);
+        valorNumDecimales.setSize(80, 20);
+        jLabel5.setSize(50, 20);
+        valorNumeroMascara.setSize(80, 20);
+        valorValorDefectoNumero.setSize(80, 20);
+        jLabel12.setSize(90, 20);
+        paneLista.setSize(530, 160);
+        valorPorDefectoLista.setSize(110, 20);
+        jLabel25.setSize(90, 20);
+        botonGuardar.setSize(71, 23);
+        botonGuardarComo.setSize(101, 23);
+        botonBorrar.setSize(63, 20);
+        botonCerrar.setSize(63, 23);
+        comboTipos.setSize(95, 20);
+    }
+
+    /**
      * Muestra una ventana que dice que para realizar esta operacion tiene que llenar todos los campos.
      * @return True - Hay campos sin llenar, False - todos los campos estan llenos.
      */
     private boolean hayCamposSinLlenar() {
         boolean alerta = false;
-        if (this.valorNombreGeneral.getText().isEmpty() || this.valorNota.getText().isEmpty()) {
+        if (this.valorNombreGeneral.getText().isEmpty()) {
             alerta = true;
         }
+
         switch (comboTipos.getSelectedIndex()) {
             case NUMERO: //HashCode para Número
-                if (this.valorNumDecimales.getText().isEmpty() ||
-                        this.valorNumeroMascara.getText().isEmpty() ||
-                        this.valorValorDefectoNumero.getText().isEmpty()) {
+                if (this.valorNumDecimales.getText().isEmpty()) {
                     alerta = true;
                 }
                 break;
@@ -789,8 +866,7 @@ public class frameManejoCampos extends javax.swing.JFrame {
                 }
                 break;
             case TEXTO: //HashCode para Texto
-                if (this.valorTextoLargo.getText().isEmpty() ||
-                        this.valorTextoDefecto.getText().isEmpty()) {
+                if (this.valorTextoLargo.getText().isEmpty()) {
                     alerta = true;
                 }
                 break;
@@ -815,13 +891,13 @@ public class frameManejoCampos extends javax.swing.JFrame {
     //ESTO LO COMENTE PORQUE HACE LO MISMO QUE hayCamposSinLlenar()
 /*
     private boolean alertaCamposSinLlenar() {
-        boolean alerta = hayCamposSinLlenar();
-        if (alerta) {
-            JOptionPane.showMessageDialog(this, "Hay Campos sin llenar");
-        }
-        return alerta;
+    boolean alerta = hayCamposSinLlenar();
+    if (alerta) {
+    JOptionPane.showMessageDialog(this, "Hay Campos sin llenar");
     }
-*/
+    return alerta;
+    }
+     */
     private void ocultarPanes() {
         panePrincipal.setVisible(true);
         paneNumero.setVisible(false);
@@ -879,7 +955,7 @@ public class frameManejoCampos extends javax.swing.JFrame {
                 }
             }
             resultado = control.getResultSet("Select * from " + tipo + " where correlativo = " + llave);
-            //resultado = consulta.seleccionarTodoGenerico(tipo, "correlativo, llave); // para modelo 3 capas
+        //resultado = consulta.seleccionarTodoGenerico(tipo, "correlativo, llave); // para modelo 3 capas
         } catch (SQLException e) {
             System.out.println("*SQL Exception: *" + e.toString());
         }
@@ -898,19 +974,9 @@ private void botonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
     if (hayCamposSinLlenar()) {
+        //No pasa nada.
     } else {
-        String[] opciones = {"Si", "No"};
-        int respuesta = JOptionPane.showOptionDialog(null, "¿Seguro que desea guardar este campo?", "Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, opciones, "No");
-
-        switch (respuesta) {
-            case 0:
-                /*Si quiere modificar el campo*/
-                botonGuardarActionAccepted();
-                break;
-            case 1:
-                /*No quiere modificar el campo*/
-                break;
-        }
+        botonGuardarActionAccepted();
         this.dispose();
     }
 }//GEN-LAST:event_botonGuardarActionPerformed
@@ -1452,13 +1518,10 @@ private void comboCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JButton botonAgregarCategoria;
     private javax.swing.JButton botonAgregarNivel;
     private javax.swing.JButton botonBorrar;
-    private javax.swing.JButton botonBorrar1;
     private javax.swing.JButton botonBusqueda;
     private javax.swing.JButton botonCerrar;
     private javax.swing.JButton botonGuardar;
-    private javax.swing.JButton botonGuardar1;
     private javax.swing.JButton botonGuardarComo;
-    private javax.swing.JButton botonGuardarComo1;
     private javax.swing.JComboBox comboCategorias;
     private javax.swing.JComboBox comboFormatoFecha;
     private javax.swing.JComboBox comboNiveles;

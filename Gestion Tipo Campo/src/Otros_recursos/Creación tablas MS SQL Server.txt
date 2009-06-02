@@ -102,8 +102,8 @@ create table MIEMBROFORMULARIO(
             ON DELETE CASCADE
 );
 
-drop table Comando
-CREATE TABLE Comando(
+drop table COMANDO
+CREATE TABLE COMANDO(
   ID					int  identity (1,1) NOT NULL,
   IDFormulario			int NOT NULL,
   Nombre				varchar(50) NOT NULL,
@@ -114,8 +114,8 @@ CREATE TABLE Comando(
   PRIMARY KEY (ID)
 );
 
-drop table CompandoMascara
-CREATE TABLE CompandoMascara(
+drop table	COMANDOMASCARA
+CREATE TABLE COMANDOMASCARA(
   ID						int  identity (1,1) NOT NULL,
   IDComando					int NOT NULL,
   TipoCampoInicial			varchar(50) NOT NULL,

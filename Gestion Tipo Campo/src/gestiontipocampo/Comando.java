@@ -9,7 +9,11 @@ package gestiontipocampo;
  *
  * @author Alberto
  */
-public class Comando {
+public class Comando  {
+    
+        protected int IDComando;
+
+
     protected String nombreComando; //El nombre del comando
     protected int tipoComando;      //El tipo (creacion, con mascara, etc)
     protected String descripcion;   //La descripcion
@@ -19,14 +23,21 @@ public class Comando {
     protected String formDestino;   //El formulario que voy a crear/borrar/modificar (si es el caso)
 
     //ESTA ES LA OPCIÓN DE COMANDO CON MÁSCARA
+    protected int IDFormulario;
+
+
     protected String tipoCampoInicial;
     protected String condicionInicial;
     protected String tipoCampoFinal;
     protected String condicionFinal;
-
-    protected ConsultaComando consulta; //controlador BD de comando
+    
+        protected String estadoFinal;
+        protected int IDFormularioTrabajar;
+    protected ControladorBD buscador;
+    protected ConsultaComando consultaComando; //controlador BD de comando
 
     public Comando() {
+        consultaComando=buscador.getConsultaComando();
         this.nombreComando = "";
         this.tipoComando = 0;
         this.descripcion = "";
@@ -118,11 +129,14 @@ public class Comando {
     }
 
     public void guardarComando(){
-        consulta=new ConsultaComando();
+        
         if(facil){
+            consultaComando.agregarComandoSinMascara(IDFormulario, nombreComando, descripcion, tipoComando , IDFormularioTrabajar,"fecha");
             //agregarComandoSinMascara(int CorrelativoFOrmulario, getNombre(), getDescripcion(), getTipoComando, int correlativoFormularioATrabajar, String fechaActualizacion)
         }
         else{
+            consultaComando.agregarComandoConMascara(IDComando, tipoCampoInicial, condicionInicial, tipoCampoFinal, estadoFinal);
+            
                //agregarComandoConMascara(...)
         }
     }

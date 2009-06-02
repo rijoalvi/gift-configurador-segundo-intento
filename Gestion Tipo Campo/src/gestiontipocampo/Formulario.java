@@ -2,17 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gestiontipocampo;
 
 import java.util.*;
-
 
 /**
  *
  * @author Alberto
  */
-public class Formulario{
+public class Formulario {
+
     protected int correlativo;
     protected String nombre;
     protected String descripcion;
@@ -27,7 +26,7 @@ public class Formulario{
      * @param nombre
      * @param desc
      */
-    public Formulario( String nombre, String desc) {
+    public Formulario(String nombre, String desc) {
         this.nombre = nombre;
         this.descripcion = desc;
         buscador = new ControladorBD();
@@ -40,44 +39,44 @@ public class Formulario{
      * Crea un nuevo Formulario extrayendo los datos de la base de datos por medio de la clase consultaFormulario
      * @param correlativo el correlativo del Formulario en la base de datos
      */
-    public Formulario( int correlativo) {
+    public Formulario(int correlativo) {
         this.correlativo = correlativo;
         buscador = new ControladorBD();
         formBD = buscador.getConsultaFormulario();
         Vector datos = this.formBD.obtenerDatosFormulario(correlativo);
-        nombre =  datos.get(0).toString();
-        descripcion =  datos.get(1).toString();
-        ultimaActualizacion =  datos.get(1).toString();
-        
+        nombre = datos.get(0).toString();
+        descripcion = datos.get(1).toString();
+        ultimaActualizacion = datos.get(2).toString();
+
         miembrosFormulario = new TreeSet();
-        
+
         cargarMiembros();
 
     }
 
-    /**************************Debo seguir aca.....(es para no perderme XD)
+    /**
      * Carga y crea los miembros en miembrosFormulario
      */
-    private void cargarMiembros(){
+    private void cargarMiembros() {
         Vector miembros = formBD.obtenerMiembros(correlativo);
 
 
         /////////lleva la cuenta de por cual valor del vector va....
-        int indice=0;
-        while(indice<miembros.size()){
+        int indice = 0;
+        while (indice < miembros.size()) {
             //crea una instancia del miembro
             MiembroFormulario datoNuevo = new MiembroFormulario(Integer.parseInt(miembros.get(indice++).toString()),
-                                                                this.correlativo, miembros.get(indice++).toString(),
-                                                                Integer.parseInt(miembros.get(indice++).toString()),
-                                                                Integer.parseInt(miembros.get(indice++).toString()),
-                                                                Integer.parseInt(miembros.get(indice++).toString()),
-                                                                Integer.parseInt(miembros.get(indice++).toString()),
-                                                                miembros.get(indice++).toString(),
-                                                                Integer.parseInt(miembros.get(indice++).toString()),
-                                                                Integer.parseInt(miembros.get(indice++).toString()),
-                                                                Integer.parseInt(miembros.get(indice++).toString()),
-                                                                Integer.parseInt(miembros.get(indice++).toString()),
-                                                                miembros.get(indice++).toString());
+                    this.correlativo, miembros.get(indice++).toString(),
+                    Integer.parseInt(miembros.get(indice++).toString()),
+                    Integer.parseInt(miembros.get(indice++).toString()),
+                    Integer.parseInt(miembros.get(indice++).toString()),
+                    Integer.parseInt(miembros.get(indice++).toString()),
+                    miembros.get(indice++).toString(),
+                    Integer.parseInt(miembros.get(indice++).toString()),
+                    Integer.parseInt(miembros.get(indice++).toString()),
+                    Integer.parseInt(miembros.get(indice++).toString()),
+                    Integer.parseInt(miembros.get(indice++).toString()),
+                    miembros.get(indice++).toString());
             miembrosFormulario.add(datoNuevo);
         }
     }
@@ -99,7 +98,7 @@ public class Formulario{
      * @param color
      * @param tamañoLetra
      */
-    public int agregarMiembro(String nombre, int valX, int valY, int ancho, int alto, String tipoLetra, int color, int tamanoLetra, int IDTP, int tabIndex, String estiloLetra){
+    public int agregarMiembro(String nombre, int valX, int valY, int ancho, int alto, String tipoLetra, int color, int tamanoLetra, int IDTP, int tabIndex, String estiloLetra) {
         //agrega en la BD el dato nuevo
         int ID = formBD.agregarMiembro(this.correlativo, nombre, valX, valY, ancho, alto, tipoLetra, color, tamanoLetra, IDTP, tabIndex, estiloLetra);
         //crea una instancia del miembro
@@ -119,7 +118,6 @@ public class Formulario{
         formBD.borrarMiembro(ID);
     }
 
-    
     /**
      * Modifica los valores del miembro
      * @param ID
@@ -131,13 +129,13 @@ public class Formulario{
      * @param tamanoLetra
      * @param IDTP
      */
-    public void upDateValoresMiembro(int ID, String nombre, int valX, int valY, int ancho, int alto, String tipoLetra, int color, int tamanoLetra, String estiloLetra){
+    public void upDateValoresMiembro(int ID, String nombre, int valX, int valY, int ancho, int alto, String tipoLetra, int color, int tamanoLetra, String estiloLetra) {
         int IDTP = getIDTipoCampo(ID);
         MiembroFormulario tmp = getMiembro(ID);
         //agrega en la BD el dato nuevo
         formBD.updateMiembro(ID, nombre, valX, valY, ancho, alto, tipoLetra, color, tamanoLetra, IDTP, tmp.getTabIndex(), estiloLetra);
         //borra el miembro viejo
-        miembrosFormulario.remove( tmp );
+        miembrosFormulario.remove(tmp);
         MiembroFormulario datoNuevo = new MiembroFormulario(ID, this.correlativo, nombre, valX, valY, ancho, alto, tipoLetra, color, tamanoLetra, IDTP, tmp.getTabIndex(), estiloLetra);
         //agrega el nuevo con los valores nuevos
         miembrosFormulario.add(datoNuevo);
@@ -149,7 +147,7 @@ public class Formulario{
      * @param valX
      * @param valY
      */
-    public void updatePosicion(int ID, int valX, int valY){
+    public void updatePosicion(int ID, int valX, int valY) {
         //agrega en la BD el dato nuevo
         formBD.updatePosicion(ID, valX, valY);
         //borra el miembro viejo
@@ -165,7 +163,7 @@ public class Formulario{
      * @param ID
      * @param tab
      */
-    public void updateTabIndex(int ID, int tab){
+    public void updateTabIndex(int ID, int tab) {
         //modifica en la BD el dato
         formBD.updateTabIndex(ID, tab);
         MiembroFormulario tmp = getMiembro(ID);
@@ -176,12 +174,12 @@ public class Formulario{
         miembrosFormulario.add(datoNuevo);
     }
 
-    private int getIDTipoCampo( int ID){
+    private int getIDTipoCampo(int ID) {
         int IDTP = -1;
-        Object[] vecMiembros = miembrosFormulario.toArray();        
-        for(int i = 0; i< vecMiembros.length; ++i){
-            if(((MiembroFormulario)vecMiembros[i]).getID() == ID){
-                IDTP = ((MiembroFormulario)vecMiembros[i]).getIDTipoCampo();
+        Object[] vecMiembros = miembrosFormulario.toArray();
+        for (int i = 0; i < vecMiembros.length; ++i) {
+            if (((MiembroFormulario) vecMiembros[i]).getID() == ID) {
+                IDTP = ((MiembroFormulario) vecMiembros[i]).getIDTipoCampo();
                 //termina el for
                 i = vecMiembros.length;
             }
@@ -194,11 +192,11 @@ public class Formulario{
      * @param ID
      * @return
      */
-    public MiembroFormulario getMiembro(int ID){
+    public MiembroFormulario getMiembro(int ID) {
         Object[] vecMiembros = miembrosFormulario.toArray();
-        for(int i = 0; i< vecMiembros.length; ++i){
-            if(((MiembroFormulario)vecMiembros[i]).getID() == ID){
-                return ((MiembroFormulario)vecMiembros[i]);
+        for (int i = 0; i < vecMiembros.length; ++i) {
+            if (((MiembroFormulario) vecMiembros[i]).getID() == ID) {
+                return ((MiembroFormulario) vecMiembros[i]);
             }
         }
         return new MiembroFormulario(-1);
@@ -250,5 +248,4 @@ public class Formulario{
     public String toString() {
         return super.toString();
     }
-
 }

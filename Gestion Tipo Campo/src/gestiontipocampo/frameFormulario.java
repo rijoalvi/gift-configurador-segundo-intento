@@ -19,6 +19,7 @@ import java.awt.FocusTraversalPolicy;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.util.*;
+import javax.swing.text.DefaultFormatterFactory;
 
 /**
  *
@@ -90,8 +91,8 @@ public class frameFormulario extends javax.swing.JFrame {
         this.setTitle("GIFT Configurador - Edición de Formularios con correlativo");
         initComponents();
         postInitComponents();
-        
-        
+
+
 
         //Inicializa el valor de los tabOrder
         tabIndex = 0;
@@ -108,7 +109,7 @@ public class frameFormulario extends javax.swing.JFrame {
         arbolPrincipal.setModel(arbolHeredado);
         ocultarPanes();
         cargarFormulario(correlativo);
-        
+
     }
 
     void cargarFormulario(int correlativo) {
@@ -118,7 +119,7 @@ public class frameFormulario extends javax.swing.JFrame {
         frameVistaPrevia.setResizable(false);
         frameVistaPrevia.setTitle(nombre);
         cargarMiembros();
-        //FALTA ACTUALIZAR TAB INDEX!!!!
+    //FALTA ACTUALIZAR TAB INDEX!!!!
     }
 
     private class DragMouseAdapter extends MouseAdapter {
@@ -168,7 +169,7 @@ public class frameFormulario extends javax.swing.JFrame {
             int ID = Integer.parseInt(c.getName());
             IDEnUso = ID;
             //Aqui hay q guardar los nuevos valores a la BD...
-            miFormulario.updatePosicion(ID, Integer.parseInt(valEjeX.getText()), Integer.parseInt(valEjeY.getText()));            
+            miFormulario.updatePosicion(ID, Integer.parseInt(valEjeX.getText()), Integer.parseInt(valEjeY.getText()));
         }
     }
 
@@ -189,6 +190,7 @@ public class frameFormulario extends javax.swing.JFrame {
             int ancho = miembro.getAncho();
             int alto = miembro.getAlto();
             String tipoLetra = miembro.getTipoLetra();
+            String estiloLetra = miembro.getEstiloLetra();
             int valx = miembro.getValX();
             int valy = miembro.getValY();
             JComponent campo;
@@ -209,16 +211,16 @@ public class frameFormulario extends javax.swing.JFrame {
                     //campo.addMouseMotionListener(motionListener);
                     //frameVistaPrevia.add( campo );
                     campo.setBounds(valx, valy, ancho, alto);
-                    componentes[tabIndex-1] = campo;
-                    idsComponentes[tabIndex-1] = IDEnUso;
+                    componentes[tabIndex - 1] = campo;
+                    idsComponentes[tabIndex - 1] = IDEnUso;
                     break;
                 case 2:
                     //Binario
                     JRadioButton radioB = agregarTipoBinario(nombre, id);
                     llenarDatosMiembro(id);
                     radioB.setBounds(valx, valy, 100, 20);
-                    componentes[tabIndex-1] = radioB;
-                    idsComponentes[tabIndex-1] = IDEnUso;
+                    componentes[tabIndex - 1] = radioB;
+                    idsComponentes[tabIndex - 1] = IDEnUso;
                     break;
                 case 3:
                     //FechaHora
@@ -230,8 +232,8 @@ public class frameFormulario extends javax.swing.JFrame {
                     frameVistaPrevia.add(campo);
                     campo.setBounds(valx, valy, 100, 20);
                     frameVistaPrevia.repaint();
-                    componentes[tabIndex-1] = campo;
-                    idsComponentes[tabIndex-1] = IDEnUso;
+                    componentes[tabIndex - 1] = campo;
+                    idsComponentes[tabIndex - 1] = IDEnUso;
                     break;
                 case 4:
                     //Texto
@@ -243,8 +245,8 @@ public class frameFormulario extends javax.swing.JFrame {
                     frameVistaPrevia.add(campo);
                     campo.setBounds(valx, valy, 100, 20);
                     frameVistaPrevia.repaint();
-                    componentes[tabIndex-1] = campo;
-                    idsComponentes[tabIndex-1] = IDEnUso;
+                    componentes[tabIndex - 1] = campo;
+                    idsComponentes[tabIndex - 1] = IDEnUso;
                     break;
                 case 5:
                     //Incremental
@@ -256,8 +258,8 @@ public class frameFormulario extends javax.swing.JFrame {
                     frameVistaPrevia.add(campo);
                     campo.setBounds(valx, valy, 100, 20);
                     frameVistaPrevia.repaint();
-                    componentes[tabIndex-1] = campo;
-                    idsComponentes[tabIndex-1] = IDEnUso;
+                    componentes[tabIndex - 1] = campo;
+                    idsComponentes[tabIndex - 1] = IDEnUso;
                     break;
                 case 6:
                     //Jerarquia
@@ -269,8 +271,8 @@ public class frameFormulario extends javax.swing.JFrame {
                     frameVistaPrevia.add(campo);
                     campo.setBounds(valx, valy, 100, 20);
                     frameVistaPrevia.repaint();
-                    componentes[tabIndex-1] = campo;
-                    idsComponentes[tabIndex-1] = IDEnUso;
+                    componentes[tabIndex - 1] = campo;
+                    idsComponentes[tabIndex - 1] = IDEnUso;
                     break;
                 case 7:
                     //Lista
@@ -282,8 +284,8 @@ public class frameFormulario extends javax.swing.JFrame {
                     frameVistaPrevia.add(campo);
                     campo.setBounds(valx, valy, 100, 20);
                     frameVistaPrevia.repaint();
-                    componentes[tabIndex-1] = campo;
-                    idsComponentes[tabIndex-1] = IDEnUso;
+                    componentes[tabIndex - 1] = campo;
+                    idsComponentes[tabIndex - 1] = IDEnUso;
                     break;
                 default:
                     break;
@@ -983,7 +985,7 @@ public class frameFormulario extends javax.swing.JFrame {
                 botonAgregarEtqActionPerformed(evt);
             }
         });
-        botonAgregarEtq.setBounds(0, 10, 120, 23);
+        botonAgregarEtq.setBounds(0, 10, 120, -1);
         paneDatos.add(botonAgregarEtq, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         botonTabIndex.setText(resourceMap.getString("botonTabIndex.text")); // NOI18N
@@ -993,14 +995,14 @@ public class frameFormulario extends javax.swing.JFrame {
                 botonTabIndexActionPerformed(evt);
             }
         });
-        botonTabIndex.setBounds(130, 10, 180, 23);
+        botonTabIndex.setBounds(130, 10, 180, -1);
         paneDatos.add(botonTabIndex, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(gestiontipocampo.GestionTipoCampoApp.class).getContext().getActionMap(frameFormulario.class, this);
         jButton1.setAction(actionMap.get("crearComando")); // NOI18N
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
-        jButton1.setBounds(320, 10, 119, 23);
+        jButton1.setBounds(320, 10, -1, -1);
         paneDatos.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         botonActualizar.setText(resourceMap.getString("botonActualizar.text")); // NOI18N
@@ -1026,7 +1028,7 @@ public class frameFormulario extends javax.swing.JFrame {
         );
         frameVistaPreviaLayout.setVerticalGroup(
             frameVistaPreviaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 910, Short.MAX_VALUE)
+            .addGap(0, 930, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1036,7 +1038,7 @@ public class frameFormulario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1049,7 +1051,7 @@ public class frameFormulario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(frameVistaPrevia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(1035, Short.MAX_VALUE)
+                        .addContainerGap(1051, Short.MAX_VALUE)
                         .addComponent(jButton3)))
                 .addContainerGap())
         );
@@ -1058,12 +1060,12 @@ public class frameFormulario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(frameVistaPrevia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(botonActualizar))
-                    .addComponent(paneDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(frameVistaPrevia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(paneDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1207,66 +1209,66 @@ public class frameFormulario extends javax.swing.JFrame {
                 //Numero
                 //Agrega todos los otros datos por defecto
                 IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, tabIndex++, "Plain");
-                JTextField num = agregarTipoNumero(nombre, IDEnUso);
-                componentes[tabIndex-1] = num;
-                idsComponentes[tabIndex-1] = IDEnUso;
+                JFormattedTextField num = agregarTipoNumero(nombre, IDEnUso);
+                componentes[tabIndex - 1] = num;
+                idsComponentes[tabIndex - 1] = IDEnUso;
                 break;
             case 2:
                 //Binario
                 //agrega el componente 1:
                 String temp = valorNombreBinario1.getText();
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre+" " +temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre + " " + temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, tabIndex++, "Plain");
                 JRadioButton bin1 = agregarTipoBinario(temp, IDEnUso);
-                componentes[tabIndex-1] = bin1;
-                idsComponentes[tabIndex-1] = IDEnUso;
+                componentes[tabIndex - 1] = bin1;
+                idsComponentes[tabIndex - 1] = IDEnUso;
 
                 //agrega el componente 2:
                 temp = valorNombreBinario2.getText();
-                IDEnUso = miFormulario.agregarMiembro(nombre+" " +temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre + " " + temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, tabIndex++, "Plain");
                 JRadioButton bin2 = agregarTipoBinario(temp, IDEnUso);
-                componentes[tabIndex-1] = bin2;
-                idsComponentes[tabIndex-1] = IDEnUso;
+                componentes[tabIndex - 1] = bin2;
+                idsComponentes[tabIndex - 1] = IDEnUso;
                 break;
             case 3:
                 //Agrega todos los otros datos por defecto
                 IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, tabIndex++, "Plain");
                 //FechaHora
                 JTextField fecHor = agregarTipoFechaHora(nombre, IDEnUso);
-                componentes[tabIndex-1] = fecHor;
-                idsComponentes[tabIndex-1] = IDEnUso;
+                componentes[tabIndex - 1] = fecHor;
+                idsComponentes[tabIndex - 1] = IDEnUso;
                 break;
             case 4:
                 //Texto
                 //Agrega todos los otros datos por defecto
                 IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, tabIndex++, "Plain");
                 JTextField texto = agregarTipoTexto(nombre, IDEnUso);
-                componentes[tabIndex-1] = texto;
-                idsComponentes[tabIndex-1] = IDEnUso;
+                componentes[tabIndex - 1] = texto;
+                idsComponentes[tabIndex - 1] = IDEnUso;
                 break;
             case 5:
                 //Incremental
                 //Agrega todos los otros datos por defecto
                 IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, tabIndex++, "Plain");
                 JTextField incr = agregarTipoIncremental(nombre, IDEnUso);
-                componentes[tabIndex-1] = incr;
-                idsComponentes[tabIndex-1] = IDEnUso;
+                componentes[tabIndex - 1] = incr;
+                idsComponentes[tabIndex - 1] = IDEnUso;
                 break;
             case 6:
                 //Jerarquia
                 //Agrega todos los otros datos por defecto
                 IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, tabIndex++, "Plain");
                 JTextField jerar = agregarTipoJerarquia(nombre, IDEnUso);
-                componentes[tabIndex-1] = jerar;
-                idsComponentes[tabIndex-1] = IDEnUso;
+                componentes[tabIndex - 1] = jerar;
+                idsComponentes[tabIndex - 1] = IDEnUso;
                 break;
             case 7:
                 //Lista
                 //Agrega todos los otros datos por defecto
                 IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, tabIndex++, "Plain");
                 JTextField lista = agregarTipoLista(nombre, IDEnUso);
-                componentes[tabIndex-1] = lista;
-                idsComponentes[tabIndex-1] = IDEnUso;
+                componentes[tabIndex - 1] = lista;
+                idsComponentes[tabIndex - 1] = IDEnUso;
                 break;
             default:
                 break;
@@ -1318,9 +1320,11 @@ public class frameFormulario extends javax.swing.JFrame {
      * Agrega al formulario un campo nuevo tipo numero
      * @param nombre
      */
-    private JTextField agregarTipoNumero(String nombre, int ID) {
+    private JFormattedTextField agregarTipoNumero(String nombre, int ID) {
         //Esto es temporal!! se debe crear un objeto de numero...
-        JTextField jtf = new JTextField(10);
+
+        JFormattedTextField jtf = new JFormattedTextField();
+        jtf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         jtf.setName("" + ID);
         jtf.addMouseListener(listener);
         jtf.addMouseMotionListener(motionListener);
@@ -1570,8 +1574,8 @@ public class frameFormulario extends javax.swing.JFrame {
             String nombre = miembro.getNombre();
             int IDTipoCampo = miembro.getIDTipoCampo();
             //Mientras no sea una etiqueta
-            if(IDTipoCampo != 0){
-                valores[k] = ID+"      " + nombre;
+            if (IDTipoCampo != 0) {
+                valores[k] = ID + "      " + nombre;
                 ++k;
             }
         }
@@ -1597,21 +1601,21 @@ public class frameFormulario extends javax.swing.JFrame {
      * Actualiza el NextFocusableComponente de los componentes del formulario
      * @param valores
      */
-    public void actualizarTabIndex(String[] valores){
+    public void actualizarTabIndex(String[] valores) {
         int idAnt = Integer.parseInt((valores[0].split(" "))[0]);
         //recorre todos los componentes
         for (int i = 1; i < numCampos; i++) {
             int id = Integer.parseInt((valores[i].split(" "))[0]);
             int indexAnt = getIndiceComponentes(idAnt);
             int index = getIndiceComponentes(id);
-            ((JComponent)(componentes[indexAnt])).setNextFocusableComponent((JComponent)(componentes[index]));
+            ((JComponent) (componentes[indexAnt])).setNextFocusableComponent((JComponent) (componentes[index]));
             idAnt = id;
         }
         //Termina el ciclo, para que sea un circulo
         int id = Integer.parseInt((valores[0].split(" "))[0]);
         int indexAnt = getIndiceComponentes(idAnt);
         int index = getIndiceComponentes(id);
-        ((JComponent)(componentes[indexAnt])).setNextFocusableComponent((JComponent)(componentes[index]));
+        ((JComponent) (componentes[indexAnt])).setNextFocusableComponent((JComponent) (componentes[index]));
     }
 
     /**
@@ -1619,10 +1623,12 @@ public class frameFormulario extends javax.swing.JFrame {
      * @param ID
      * @return
      */
-    private int getIndiceComponentes( int ID ){
-        for(int k = 0; k < componentes.length; ++k)
-            if( idsComponentes[k] == ID )
+    private int getIndiceComponentes(int ID) {
+        for (int k = 0; k < componentes.length; ++k) {
+            if (idsComponentes[k] == ID) {
                 return k;
+            }
+        }
         return -1;
     }
 

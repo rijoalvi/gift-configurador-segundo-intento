@@ -13,7 +13,7 @@ public class Comando {
     protected String nombreComando; //El nombre del comando
     protected int tipoComando;      //El tipo (creacion, con mascara, etc)
     protected String descripcion;   //La descripcion
-    protected boolean facilDificil; //Aqui diferenciamos si es con mascara o es de los faciles. Si es facil es true, si es con mascara es false
+    protected boolean facil; //Aqui diferenciamos si es con mascara o es de los faciles. Si es facil es true, si es con mascara es false
 
     //ESTA ES LA OPCIÓN DE COMANDOS DE CREAR, BORRAR O MODIFICAR
     protected String formDestino;   //El formulario que voy a crear/borrar/modificar (si es el caso)
@@ -23,6 +23,8 @@ public class Comando {
     protected String condicionInicial;
     protected String tipoCampoFinal;
     protected String condicionFinal;
+
+    protected ConsultaComando consulta; //controlador BD de comando
 
     public Comando() {
         this.nombreComando = "";
@@ -47,11 +49,11 @@ public class Comando {
          4 - Comando con Máscara
          */
         this.tipoComando = tipo;
-        if(tipoComando!=4{
-            facilDificil=true;
+        if(tipoComando!=4){
+            facil=true;
         }
         else{
-            facilDificil=false;
+            facil=false;
         }
     }
 
@@ -111,7 +113,17 @@ public class Comando {
         return(this.condicionFinal);
     }
 
-    public boolean getFacilDificil(){
-        return(this.facilDificil);
+    public boolean getFacil(){
+        return(this.facil);
+    }
+
+    public void guardarComando(){
+        consulta=new ConsultaComando();
+        if(facil){
+            //agregarComandoSinMascara(int CorrelativoFOrmulario, getNombre(), getDescripcion(), getTipoComando, int correlativoFormularioATrabajar, String fechaActualizacion)
+        }
+        else{
+               //agregarComandoConMascara(...)
+        }
     }
 }

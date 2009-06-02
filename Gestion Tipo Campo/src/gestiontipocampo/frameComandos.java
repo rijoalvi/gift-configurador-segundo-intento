@@ -24,6 +24,7 @@ public class frameComandos extends javax.swing.JFrame {
     public frameComandos() {
         initComponents();
         ControladorBD miPrueba = new ControladorBD();
+        Comando comandoActual = new Comando(); // Clase comando con la que trabajara la interfaz!
         javax.swing.DefaultComboBoxModel modelo = new javax.swing.DefaultComboBoxModel( );
         modelo = (DefaultComboBoxModel) comboSeleccionFormulario.getModel();
 

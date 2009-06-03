@@ -57,7 +57,7 @@ public class Formulario {
     /**
      * Carga y crea los miembros en miembrosFormulario
      */
-    private void cargarMiembros() {
+    public Vector cargarMiembros() {
         Vector miembros = formBD.obtenerMiembros(correlativo);
 
 
@@ -65,7 +65,8 @@ public class Formulario {
         int indice = 0;
         while (indice < miembros.size()) {
             //crea una instancia del miembro
-            MiembroFormulario datoNuevo = new MiembroFormulario(Integer.parseInt(miembros.get(indice++).toString()),
+            MiembroFormulario datoNuevo = new MiembroFormulario(
+                    Integer.parseInt(miembros.get(indice++).toString()),
                     this.correlativo, miembros.get(indice++).toString(),
                     Integer.parseInt(miembros.get(indice++).toString()),
                     Integer.parseInt(miembros.get(indice++).toString()),
@@ -80,6 +81,7 @@ public class Formulario {
                     miembros.get(indice++).toString());
             miembrosFormulario.add(datoNuevo);
         }
+        return miembros
     }
 
     /**

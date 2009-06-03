@@ -11,9 +11,7 @@ package gestiontipocampo;
  */
 public class Comando  {
     
-        protected int IDComando;
-
-
+    protected int IDComando;
     protected String nombreComando; //El nombre del comando
     protected int tipoComando;      //El tipo (creacion, con mascara, etc)
     protected String descripcion;   //La descripcion
@@ -31,12 +29,13 @@ public class Comando  {
     protected String tipoCampoFinal;
     protected String condicionFinal;
     
-        protected String estadoFinal;
-        protected int IDFormularioTrabajar;
+    protected String estadoFinal;
+    protected int IDFormularioTrabajar;
     protected ControladorBD buscador;
     protected ConsultaComando consultaComando; //controlador BD de comando
 
     public Comando() {
+        buscador = new ControladorBD();
         consultaComando=buscador.getConsultaComando();
         this.nombreComando = "";
         this.tipoComando = 0;
@@ -52,6 +51,9 @@ public class Comando  {
         this.nombreComando = name;
     }
 
+    public void setIDFormularioTrabajar(int idForm){
+        this.IDFormularioTrabajar = idForm;
+    }
     public void setTipoComando(int tipo){
         /*OJO: Orden de los comandos:
          1 - Comando de Crear

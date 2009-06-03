@@ -240,6 +240,10 @@ public class Formulario {
         formBD.modificarDescripcion(nombre, correlativo);
     }
 
+    public int getCorrelativo(){
+        return correlativo;
+    }
+
     /**
      * Sobre escribe el toString del padre
      * @return

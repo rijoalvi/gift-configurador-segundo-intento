@@ -982,7 +982,7 @@ public class frameFormulario extends javax.swing.JFrame {
                 botonAgregarEtqActionPerformed(evt);
             }
         });
-        botonAgregarEtq.setBounds(0, 10, 120, -1);
+        botonAgregarEtq.setBounds(0, 10, 120, 23);
         paneDatos.add(botonAgregarEtq, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         botonTabIndex.setText(resourceMap.getString("botonTabIndex.text")); // NOI18N
@@ -992,14 +992,14 @@ public class frameFormulario extends javax.swing.JFrame {
                 botonTabIndexActionPerformed(evt);
             }
         });
-        botonTabIndex.setBounds(130, 10, 180, -1);
+        botonTabIndex.setBounds(130, 10, 180, 23);
         paneDatos.add(botonTabIndex, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(gestiontipocampo.GestionTipoCampoApp.class).getContext().getActionMap(frameFormulario.class, this);
         jButton1.setAction(actionMap.get("crearComando")); // NOI18N
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
-        jButton1.setBounds(320, 10, -1, -1);
+        jButton1.setBounds(320, 10, 119, 23);
         paneDatos.add(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         botonActualizar.setText(resourceMap.getString("botonActualizar.text")); // NOI18N
@@ -1025,7 +1025,7 @@ public class frameFormulario extends javax.swing.JFrame {
         );
         frameVistaPreviaLayout.setVerticalGroup(
             frameVistaPreviaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 930, Short.MAX_VALUE)
+            .addGap(0, 950, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -1935,7 +1935,8 @@ public class frameFormulario extends javax.swing.JFrame {
 
     @org.jdesktop.application.Action
     public void crearComando() {
-        frameComandos comando = new frameComandos();
+        int num=miFormulario.getCorrelativo();
+        frameComandos comando = new frameComandos(num);
         comando.setVisible(true);
 
 

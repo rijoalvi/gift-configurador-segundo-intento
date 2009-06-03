@@ -6,6 +6,9 @@
 package gestiontipocampo;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.tree.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -26,7 +29,7 @@ public class frameFormulario extends javax.swing.JFrame {
 
     /** Creates new form frameFormulario */
     public frameFormulario() {
-        this.setTitle("GIFT Configurador - Edición de Formularios1");
+        this.setTitle("GIFT Configurador - Edición de Formularios!");
         String nombre = JOptionPane.showInputDialog(this, "Favor ingresar el nombre del formulario a crear", "", JOptionPane.QUESTION_MESSAGE);
         String descripcion = JOptionPane.showInputDialog(this, "Favor ingresar la descripcion del formulario a crear", "", JOptionPane.QUESTION_MESSAGE);
 
@@ -38,6 +41,7 @@ public class frameFormulario extends javax.swing.JFrame {
 
         //Inicializa el valor de los tabOrder
         tabIndex = 0;
+        IDcampoConcreto = 0;
 
         componentes = new Object[100];
         idsComponentes = new int[100];
@@ -67,6 +71,7 @@ public class frameFormulario extends javax.swing.JFrame {
 
         //Inicializa el valor de los tabOrder
         tabIndex = 0;
+        IDcampoConcreto = 0;
 
         componentes = new Object[100];
         idsComponentes = new int[100];
@@ -93,6 +98,7 @@ public class frameFormulario extends javax.swing.JFrame {
 
         //Inicializa el valor de los tabOrder
         tabIndex = 0;
+        IDcampoConcreto = 0;
 
         componentes = new Object[100];
         idsComponentes = new int[100];
@@ -183,6 +189,7 @@ public class frameFormulario extends javax.swing.JFrame {
             int id = miembro.getID();
             IDEnUso = id;
             int idTipoCampo = miembro.getIDTipoCampo();
+            IDcampoConcreto = miembro.getIDCampo();
             int tamLetra = miembro.getTamanoLetra();
             int ancho = miembro.getAncho();
             int alto = miembro.getAlto();
@@ -208,81 +215,76 @@ public class frameFormulario extends javax.swing.JFrame {
                     //campo.addMouseMotionListener(motionListener);
                     //frameVistaPrevia.add( campo );
                     campo.setBounds(valx, valy, ancho, alto);
-                    componentes[tabIndex - 1] = campo;
-                    idsComponentes[tabIndex - 1] = IDEnUso;
+                    componentes[tabIndex ] = campo;
+                    idsComponentes[tabIndex ] = IDEnUso;
                     break;
                 case 2:
                     //Binario
                     JRadioButton radioB = agregarTipoBinario(nombre, id);
                     llenarDatosMiembro(id);
                     radioB.setBounds(valx, valy, 100, 20);
-                    componentes[tabIndex - 1] = radioB;
-                    idsComponentes[tabIndex - 1] = IDEnUso;
+                    componentes[tabIndex ] = radioB;
+                    idsComponentes[tabIndex ] = IDEnUso;
                     break;
                 case 3:
                     //FechaHora
-                    campo = new JTextField();
-                    agregarTipoFechaHora(nombre, id);
+                    campo = agregarTipoFechaHora(nombre, id);
                     campo.setName("" + IDEnUso);
                     campo.addMouseListener(listener);
                     campo.addMouseMotionListener(motionListener);
                     frameVistaPrevia.add(campo);
                     campo.setBounds(valx, valy, 100, 20);
                     frameVistaPrevia.repaint();
-                    componentes[tabIndex - 1] = campo;
-                    idsComponentes[tabIndex - 1] = IDEnUso;
+                    componentes[tabIndex ] = campo;
+                    idsComponentes[tabIndex ] = IDEnUso;
                     break;
                 case 4:
                     //Texto
-                    campo = new JTextField();
-                    agregarTipoTexto(nombre, id);
+                    campo = agregarTipoTexto(nombre, id);
                     campo.setName("" + IDEnUso);
                     campo.addMouseListener(listener);
                     campo.addMouseMotionListener(motionListener);
                     frameVistaPrevia.add(campo);
                     campo.setBounds(valx, valy, 100, 20);
                     frameVistaPrevia.repaint();
-                    componentes[tabIndex - 1] = campo;
-                    idsComponentes[tabIndex - 1] = IDEnUso;
+                    componentes[tabIndex ] = campo;
+                    idsComponentes[tabIndex ] = IDEnUso;
                     break;
                 case 5:
                     //Incremental
-                    campo = new JTextField();
-                    agregarTipoIncremental(nombre, id);
+                    campo = agregarTipoIncremental(nombre, id);
                     campo.setName("" + IDEnUso);
                     campo.addMouseListener(listener);
                     campo.addMouseMotionListener(motionListener);
                     frameVistaPrevia.add(campo);
                     campo.setBounds(valx, valy, 100, 20);
                     frameVistaPrevia.repaint();
-                    componentes[tabIndex - 1] = campo;
-                    idsComponentes[tabIndex - 1] = IDEnUso;
+                    componentes[tabIndex ] = campo;
+                    idsComponentes[tabIndex ] = IDEnUso;
                     break;
                 case 6:
                     //Jerarquia
-                    campo = new JTextField();
-                    agregarTipoJerarquia(nombre, id);
+                    campo = agregarTipoJerarquia(nombre, id);
                     campo.setName("" + IDEnUso);
                     campo.addMouseListener(listener);
                     campo.addMouseMotionListener(motionListener);
                     frameVistaPrevia.add(campo);
                     campo.setBounds(valx, valy, 100, 20);
                     frameVistaPrevia.repaint();
-                    componentes[tabIndex - 1] = campo;
-                    idsComponentes[tabIndex - 1] = IDEnUso;
+                    componentes[tabIndex ] = campo;
+                    idsComponentes[tabIndex ] = IDEnUso;
                     break;
                 case 7:
                     //Lista
-                    campo = new JTextField();
-                    agregarTipoLista(nombre, id);
+                    campo = agregarTipoLista(nombre, id);
                     campo.setName("" + IDEnUso);
                     campo.addMouseListener(listener);
                     campo.addMouseMotionListener(motionListener);
                     frameVistaPrevia.add(campo);
                     campo.setBounds(valx, valy, 100, 20);
                     frameVistaPrevia.repaint();
-                    componentes[tabIndex - 1] = campo;
-                    idsComponentes[tabIndex - 1] = IDEnUso;
+                    componentes[tabIndex ] = campo;
+                    idsComponentes[tabIndex ] = IDEnUso;
                     break;
                 default:
                     break;
@@ -1083,11 +1085,11 @@ public class frameFormulario extends javax.swing.JFrame {
         botonMenosAncho.setSize(63, 23);
         botonTabIndex.setSize(73, 23);
         bottonColor.setSize(45, 23);
-        colorDato.setSize(31, 20);
+        colorDato.setSize(60, 20);
         comboCategorias.setSize(130, 20);
         comboFormatoFecha.setSize(130, 20);
         comboNiveles.setSize(130, 20);
-        comboTipoLetra.setSize(130, 20);
+        comboTipoLetra.setSize(100, 20);
         comboTipos.setSize(130, 20);
         frameVistaPrevia.setSize(500, 880);
         jButton3.setSize(63, 23);
@@ -1149,8 +1151,8 @@ public class frameFormulario extends javax.swing.JFrame {
         radioOpcionBinaria2.setSize(33, 23);
         tamanoLetra.setSize(80, 20);
         textoDato.setSize(80, 20);
-        valEjeX.setSize(80, 20);
-        valEjeY.setSize(80, 20);
+        valEjeX.setSize(50, 20);
+        valEjeY.setSize(50, 20);
         valorFechaDefecto.setSize(120, 20);
         valorIncremento.setSize(120, 20);
         valorNombreBinario1.setSize(120, 20);
@@ -1205,7 +1207,7 @@ public class frameFormulario extends javax.swing.JFrame {
             case 1:
                 //Numero
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, IDcampoConcreto, tabIndex++, "Plain");
                 JFormattedTextField num = agregarTipoNumero(nombre, IDEnUso);
                 componentes[tabIndex - 1] = num;
                 idsComponentes[tabIndex - 1] = IDEnUso;
@@ -1215,30 +1217,30 @@ public class frameFormulario extends javax.swing.JFrame {
                 //agrega el componente 1:
                 String temp = valorNombreBinario1.getText();
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre + " " + temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre + " " + temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, IDcampoConcreto, tabIndex++, "Plain");
                 JRadioButton bin1 = agregarTipoBinario(temp, IDEnUso);
                 componentes[tabIndex - 1] = bin1;
                 idsComponentes[tabIndex - 1] = IDEnUso;
 
                 //agrega el componente 2:
                 temp = valorNombreBinario2.getText();
-                IDEnUso = miFormulario.agregarMiembro(nombre + " " + temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre + " " + temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, IDcampoConcreto, tabIndex++, "Plain");
                 JRadioButton bin2 = agregarTipoBinario(temp, IDEnUso);
                 componentes[tabIndex - 1] = bin2;
                 idsComponentes[tabIndex - 1] = IDEnUso;
                 break;
             case 3:
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, IDcampoConcreto, tabIndex++, "Plain");
                 //FechaHora
-                JTextField fecHor = agregarTipoFechaHora(nombre, IDEnUso);
+                JFormattedTextField fecHor = agregarTipoFechaHora(nombre, IDEnUso);
                 componentes[tabIndex - 1] = fecHor;
                 idsComponentes[tabIndex - 1] = IDEnUso;
                 break;
             case 4:
                 //Texto
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, IDcampoConcreto, tabIndex++, "Plain");
                 JTextField texto = agregarTipoTexto(nombre, IDEnUso);
                 componentes[tabIndex - 1] = texto;
                 idsComponentes[tabIndex - 1] = IDEnUso;
@@ -1246,7 +1248,7 @@ public class frameFormulario extends javax.swing.JFrame {
             case 5:
                 //Incremental
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, IDcampoConcreto, tabIndex++, "Plain");
                 JTextField incr = agregarTipoIncremental(nombre, IDEnUso);
                 componentes[tabIndex - 1] = incr;
                 idsComponentes[tabIndex - 1] = IDEnUso;
@@ -1254,7 +1256,7 @@ public class frameFormulario extends javax.swing.JFrame {
             case 6:
                 //Jerarquia
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, IDcampoConcreto, tabIndex++, "Plain");
                 JTextField jerar = agregarTipoJerarquia(nombre, IDEnUso);
                 componentes[tabIndex - 1] = jerar;
                 idsComponentes[tabIndex - 1] = IDEnUso;
@@ -1262,8 +1264,8 @@ public class frameFormulario extends javax.swing.JFrame {
             case 7:
                 //Lista
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, tabIndex++, "Plain");
-                JTextField lista = agregarTipoLista(nombre, IDEnUso);
+                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, IDcampoConcreto, tabIndex++, "Plain");
+                JComboBox lista = agregarTipoLista(nombre, IDEnUso);
                 componentes[tabIndex - 1] = lista;
                 idsComponentes[tabIndex - 1] = IDEnUso;
                 break;
@@ -1353,10 +1355,15 @@ public class frameFormulario extends javax.swing.JFrame {
      * Agrega al formulario un campo nuevo tipo Fecha Hora
      * @param nombre
      */
-    private JTextField agregarTipoFechaHora(String nombre, int ID) {
+    private JFormattedTextField agregarTipoFechaHora(String nombre, int ID){
 
         //Esto es temporal!! se debe crear un objeto de fechahora...
-        JTextField jtf = new JTextField(15);
+        JFormattedTextField jtf = new JFormattedTextField();
+        try {
+            jtf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (ParseException ex) {
+            Logger.getLogger(frameFormulario.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jtf.setName("" + ID);
         jtf.addMouseListener(listener);
         jtf.addMouseMotionListener(motionListener);
@@ -1422,10 +1429,13 @@ public class frameFormulario extends javax.swing.JFrame {
      * Agrega al formulario un campo nuevo tipo Lista
      * @param nombre
      */
-    private JTextField agregarTipoLista(String nombre, int ID) {
+    private JComboBox agregarTipoLista(String nombre, int ID) {
         //Esto es temporal!! se debe crear un objeto de Lista...
-        JTextField jtf = new JTextField(15);
+        JComboBox jtf = new JComboBox();
+        String[] lista = miFormulario.getLista(IDcampoConcreto);
         jtf.setName("" + ID);
+        jtf.setEditable(false);
+        jtf.setModel(new javax.swing.DefaultComboBoxModel(lista));
         jtf.addMouseListener(listener);
         jtf.addMouseMotionListener(motionListener);
         frameVistaPrevia.add(jtf);
@@ -1505,7 +1515,7 @@ public class frameFormulario extends javax.swing.JFrame {
      */
     private void agregarRotulo(String texto) {
         //Como es etiqueta uso tabIndex -1
-        IDEnUso = miFormulario.agregarMiembro(texto, 1, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 0, -1, "Plain");
+        IDEnUso = miFormulario.agregarMiembro(texto, 1, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 0, -1, -1, "Plain");
         agregarEtiqueta(texto, IDEnUso);
         llenarDatosMiembro(IDEnUso);
     }
@@ -1753,6 +1763,7 @@ public class frameFormulario extends javax.swing.JFrame {
         //Trae todos los valores de la tabla TIPOCAMPO
         String valoresGlobales = buscarDatosEnBD(nombre);
         String[] valoresSeparados = valoresGlobales.split(";");
+        IDcampoConcreto = Integer.parseInt(valoresSeparados[0]);
         String valoresEspecificos = buscarPorTipoEnBD(Integer.parseInt(valoresSeparados[0]), tipo);
         String[] valoresEspSep = valoresEspecificos.split(";");
         comboTipos.setSelectedIndex(tipo);
@@ -2058,4 +2069,5 @@ public class frameFormulario extends javax.swing.JFrame {
     private int numCampos;
     private Object[] componentes;
     private int[] idsComponentes;
+    private int IDcampoConcreto;
 }

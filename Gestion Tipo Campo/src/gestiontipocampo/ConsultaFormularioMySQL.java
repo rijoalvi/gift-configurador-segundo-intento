@@ -48,8 +48,8 @@ public class ConsultaFormularioMySQL extends ConsultaFormulario {
      * @param IDTP
      * @return El ID del nuevo miembro
      */
-    public int agregarMiembro(int IDFormulario, String nombre, int valX, int valY, int ancho, int alto, String tipoLetra, int color, int tamanoLetra, int IDTP, int tabIndex, String estiloLetra) {
-        this.doUpdate("insert into MIEMBROFORMULARIO (IDFormulario, nombre, valX, valY, ancho, alto, tipoLetra, color, tamanoLetra, IDTipoCampo, tabIndex, estiloLetra) values ('" + IDFormulario + "', '" + nombre + "', " + valX + ", " + valY + ", " + ancho + ", " + alto + ", '" + tipoLetra + "', '" + color + "', '" + tamanoLetra + "', " + IDTP + ", " + tabIndex + ", '" + estiloLetra + "');");
+    public int agregarMiembro(int IDFormulario, String nombre, int valX, int valY, int ancho, int alto, String tipoLetra, int color, int tamanoLetra, int IDTP, int IDCC, int tabIndex, String estiloLetra) {
+        this.doUpdate("insert into MIEMBROFORMULARIO (IDFormulario, nombre, valX, valY, ancho, alto, tipoLetra, color, tamanoLetra, IDTipoCampo, IDCampo, tabIndex, estiloLetra) values ('" + IDFormulario + "', '" + nombre + "', " + valX + ", " + valY + ", " + ancho + ", " + alto + ", '" + tipoLetra + "', '" + color + "', '" + tamanoLetra + "', " + IDTP + ", " + IDCC + ", " + tabIndex + ", '" + estiloLetra + "');");
         int ID = -1;
         try { //Se busca el ID de los datos que acaba de insertar
             ResultSet resultado = this.getResultSet("select correlativo from MIEMBROFORMULARIO where nombre = '" + nombre + "' AND IDFormulario = " + IDFormulario + ";");
@@ -151,7 +151,7 @@ public class ConsultaFormularioMySQL extends ConsultaFormulario {
     public Vector obtenerMiembros(int correlativoFormulario) {
         Vector miembros = new Vector();
         //ID, this.correlativo, nombre, valX, valY, tipoLetra, color, tamanoLetra, IDTP
-        String consulta = "Select correlativo,nombre,valX,valY,ancho,alto,tipoLetra,color,tamanoLetra,IDTipoCampo,tabIndex,estiloLetra From MIEMBROFORMULARIO Where IDFormulario = " + correlativoFormulario;
+        String consulta = "Select correlativo, nombre, valX, valY, ancho, alto, tipoLetra, color, tamanoLetra, IDTipoCampo, IDCampo, tabIndex, estiloLetra From MIEMBROFORMULARIO Where IDFormulario = " + correlativoFormulario;
         ResultSet resultado = this.getResultSet(consulta);
 
 
@@ -167,6 +167,7 @@ public class ConsultaFormularioMySQL extends ConsultaFormulario {
                 miembros.add(resultado.getObject("color"));
                 miembros.add(resultado.getObject("tamanoLetra"));
                 miembros.add(resultado.getObject("IDTipoCampo"));
+                miembros.add(resultado.getObject("IDCampo"));
                 miembros.add(resultado.getObject("tabIndex"));
                 miembros.add(resultado.getObject("estiloLetra"));
 

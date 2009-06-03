@@ -2,16 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gestiontipocampo;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Vector;
 
 /**
  *
  * @author Alberto
  */
-public abstract class ConsultaFormulario extends ControladorBD{
+public abstract class ConsultaFormulario extends ControladorBD {
 
     /**
      * Guarda un nuevo formulario en la BD
@@ -33,7 +34,7 @@ public abstract class ConsultaFormulario extends ControladorBD{
      * @param IDTP
      * @return El ID del nuevo miembro
      */
-    public abstract int agregarMiembro(int IDFormulario, String nombre, int valX, int valY, int ancho, int alto, String tipoLetra, int color, int tamanoLetra, int IDTP, int tabIndex, String estiloLetra);
+    public abstract int agregarMiembro(int IDFormulario, String nombre, int valX, int valY, int ancho, int alto, String tipoLetra, int color, int tamanoLetra, int IDTP, int IDCC, int tabIndex, String estiloLetra);
 
     /**
      * Borra un miembro formulario en la BD
@@ -97,4 +98,30 @@ public abstract class ConsultaFormulario extends ControladorBD{
      */
     public abstract Vector obtenerMiembros(int correlativoFormulario);
 
+
+    /**
+     * Devuelve la lista de elementos de un tipoCampo Lista
+     * @param correlativoLista
+     * @return lista de elementos
+     */
+    public String[] obtenerListaDeLista(int correlativoLista) {
+        String[] result;
+        Vector<String> lista = new Vector<String>();
+        String consulta = "Select valor, numeroElemento From MIEMBROLISTA Where IDLista = " + correlativoLista;
+        ResultSet resultado = this.getResultSet(consulta);
+        try {
+            while (resultado.next()) {
+                lista.add(resultado.getObject("valor").toString());
+            }
+        } catch (SQLException e) {
+            System.out.println("*SQL Exception: aca?*" + e.toString());
+        }
+
+        result = new String[lista.size()];
+        for(int i = 0; i < lista.size(); i++){
+            result[i] = lista.get(i);
+        }
+
+        return result;
+    }
 }

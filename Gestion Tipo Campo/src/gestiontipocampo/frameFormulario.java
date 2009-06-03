@@ -211,9 +211,6 @@ public class frameFormulario extends javax.swing.JFrame {
                     campo = agregarTipoNumero(nombre, id);
                     llenarDatosMiembro(id);
                     actualizarComponente(textoDato.getText(), Integer.parseInt(valEjeX.getText()), Integer.parseInt(valEjeY.getText()), comboTipoLetra.getSelectedItem().toString(), colorDato.getForeground().getRGB(), Integer.parseInt(tamanoLetra.getText()), compEnUso.getWidth(), compEnUso.getHeight(), comboEstiloLetra.getSelectedItem().toString());
-                    //campo.addMouseListener(listener);
-                    //campo.addMouseMotionListener(motionListener);
-                    //frameVistaPrevia.add( campo );
                     campo.setBounds(valx, valy, ancho, alto);
                     componentes[tabIndex ] = campo;
                     idsComponentes[tabIndex ] = IDEnUso;
@@ -1200,8 +1197,7 @@ public class frameFormulario extends javax.swing.JFrame {
     private void agregarCampo() {
         //Se agrega el valor al formulario
         String nombre = JOptionPane.showInputDialog(this, "Favor ingresar el nombre del campo a agregar", "", JOptionPane.QUESTION_MESSAGE);
-        agregarRotulo(nombre,IDcampoConcreto);
-        nombre = /*"v. " + */nombre;
+        agregarRotulo("et. "+ nombre,IDcampoConcreto);
         //En este switch se debe crear una instancia del nuevo tipo campo a agregar al formulario
         switch (comboTipos.getSelectedIndex()) {
             case 1:
@@ -1217,14 +1213,14 @@ public class frameFormulario extends javax.swing.JFrame {
                 //agrega el componente 1:
                 String temp = valorNombreBinario1.getText();
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(/*nombre + " " + */temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, IDcampoConcreto, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre + " " + temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, IDcampoConcreto, tabIndex++, "Plain");
                 JRadioButton bin1 = agregarTipoBinario(temp, IDEnUso);
                 componentes[tabIndex - 1] = bin1;
                 idsComponentes[tabIndex - 1] = IDEnUso;
 
                 //agrega el componente 2:
                 temp = valorNombreBinario2.getText();
-                IDEnUso = miFormulario.agregarMiembro(/*nombre + " " +*/ temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, IDcampoConcreto, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre + " " + temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, IDcampoConcreto, tabIndex++, "Plain");
                 JRadioButton bin2 = agregarTipoBinario(temp, IDEnUso);
                 componentes[tabIndex - 1] = bin2;
                 idsComponentes[tabIndex - 1] = IDEnUso;

@@ -1231,7 +1231,7 @@ public class frameFormulario extends javax.swing.JFrame {
                 break;
             case 3:
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, IDcampoConcreto, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 3, IDcampoConcreto, tabIndex++, "Plain");
                 //FechaHora
                 JFormattedTextField fecHor = agregarTipoFechaHora(nombre, IDEnUso);
                 componentes[tabIndex - 1] = fecHor;
@@ -1240,7 +1240,7 @@ public class frameFormulario extends javax.swing.JFrame {
             case 4:
                 //Texto
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, IDcampoConcreto, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 4, IDcampoConcreto, tabIndex++, "Plain");
                 JTextField texto = agregarTipoTexto(nombre, IDEnUso);
                 componentes[tabIndex - 1] = texto;
                 idsComponentes[tabIndex - 1] = IDEnUso;
@@ -1248,7 +1248,7 @@ public class frameFormulario extends javax.swing.JFrame {
             case 5:
                 //Incremental
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, IDcampoConcreto, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 5, IDcampoConcreto, tabIndex++, "Plain");
                 JTextField incr = agregarTipoIncremental(nombre, IDEnUso);
                 componentes[tabIndex - 1] = incr;
                 idsComponentes[tabIndex - 1] = IDEnUso;
@@ -1256,7 +1256,7 @@ public class frameFormulario extends javax.swing.JFrame {
             case 6:
                 //Jerarquia
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, IDcampoConcreto, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 6, IDcampoConcreto, tabIndex++, "Plain");
                 JTextField jerar = agregarTipoJerarquia(nombre, IDEnUso);
                 componentes[tabIndex - 1] = jerar;
                 idsComponentes[tabIndex - 1] = IDEnUso;
@@ -1264,7 +1264,7 @@ public class frameFormulario extends javax.swing.JFrame {
             case 7:
                 //Lista
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 1, IDcampoConcreto, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(nombre, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 7, IDcampoConcreto, tabIndex++, "Plain");
                 JComboBox lista = agregarTipoLista(nombre, IDEnUso);
                 componentes[tabIndex - 1] = lista;
                 idsComponentes[tabIndex - 1] = IDEnUso;

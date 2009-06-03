@@ -101,8 +101,8 @@ create table MIEMBROFORMULARIO(
 );
 
 
-drop table Comando
-CREATE TABLE Comando(
+--drop table COMANDO
+CREATE TABLE COMANDO(
   ID					int  auto_increment NOT NULL,
   IDFormulario			int NOT NULL,
   Nombre				varchar(50) NOT NULL,
@@ -113,8 +113,8 @@ CREATE TABLE Comando(
   PRIMARY KEY (ID)
 );
 
-drop table CompandoMascara
-CREATE TABLE CompandoMascara(
+--drop table	COMANDOMASCARA
+CREATE TABLE COMANDOMASCARA(
   ID						int  auto_increment NOT NULL,
   IDComando					int NOT NULL,
   TipoCampoInicial			varchar(50) NOT NULL,
@@ -123,3 +123,4 @@ CREATE TABLE CompandoMascara(
   EstadoFinal				varchar(50) NOT NULL,
   PRIMARY KEY (ID)
 );
+

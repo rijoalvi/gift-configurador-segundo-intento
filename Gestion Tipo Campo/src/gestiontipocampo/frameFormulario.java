@@ -1947,7 +1947,7 @@ public class frameFormulario extends javax.swing.JFrame {
     @org.jdesktop.application.Action
     public void crearComando() {
         int num=miFormulario.getCorrelativo();
-        frameComandos comando = new frameComandos(num);
+        frameComandos comando = new frameComandos(miFormulario, num);
         comando.setVisible(true);
 
 

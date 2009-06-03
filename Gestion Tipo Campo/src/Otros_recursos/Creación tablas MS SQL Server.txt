@@ -5,7 +5,7 @@ CREATE TABLE BINARIO(
   valor1        varchar(20) NOT NULL,
   nombre2       varchar(20) NOT NULL,
   valor2        varchar(20) NOT NULL,
-  valorDefecto  varchar(6) NOT NULL,
+  valorDefecto  varchar(20) NOT NULL,
   PRIMARY KEY (correlativo)
 );
 

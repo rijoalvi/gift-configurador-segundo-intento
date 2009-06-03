@@ -1200,8 +1200,8 @@ public class frameFormulario extends javax.swing.JFrame {
     private void agregarCampo() {
         //Se agrega el valor al formulario
         String nombre = JOptionPane.showInputDialog(this, "Favor ingresar el nombre del campo a agregar", "", JOptionPane.QUESTION_MESSAGE);
-        agregarRotulo(nombre);
-        nombre = "v. " + nombre;
+        agregarRotulo(nombre,IDcampoConcreto);
+        nombre = /*"v. " + */nombre;
         //En este switch se debe crear una instancia del nuevo tipo campo a agregar al formulario
         switch (comboTipos.getSelectedIndex()) {
             case 1:
@@ -1217,14 +1217,14 @@ public class frameFormulario extends javax.swing.JFrame {
                 //agrega el componente 1:
                 String temp = valorNombreBinario1.getText();
                 //Agrega todos los otros datos por defecto
-                IDEnUso = miFormulario.agregarMiembro(nombre + " " + temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, IDcampoConcreto, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(/*nombre + " " + */temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, IDcampoConcreto, tabIndex++, "Plain");
                 JRadioButton bin1 = agregarTipoBinario(temp, IDEnUso);
                 componentes[tabIndex - 1] = bin1;
                 idsComponentes[tabIndex - 1] = IDEnUso;
 
                 //agrega el componente 2:
                 temp = valorNombreBinario2.getText();
-                IDEnUso = miFormulario.agregarMiembro(nombre + " " + temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, IDcampoConcreto, tabIndex++, "Plain");
+                IDEnUso = miFormulario.agregarMiembro(/*nombre + " " +*/ temp, 10, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 2, IDcampoConcreto, tabIndex++, "Plain");
                 JRadioButton bin2 = agregarTipoBinario(temp, IDEnUso);
                 componentes[tabIndex - 1] = bin2;
                 idsComponentes[tabIndex - 1] = IDEnUso;
@@ -1506,16 +1506,16 @@ public class frameFormulario extends javax.swing.JFrame {
 
     private void botonAgregarEtqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarEtqActionPerformed
         String texto = JOptionPane.showInputDialog(this, "Favor ingresar el texto para la etiqueta", "", JOptionPane.QUESTION_MESSAGE);
-        agregarRotulo(texto);
+        agregarRotulo(texto,-1);///***************con un -1 en idCampo pues no tiene campo asociado
     }//GEN-LAST:event_botonAgregarEtqActionPerformed
 
     /**
      * Agrega un rotulo/etiqueta nueva al formulario
      * Llama al metodo respectivo para guardar en la BD tamb
      */
-    private void agregarRotulo(String texto) {
+    private void agregarRotulo(String texto,int idCampo) {
         //Como es etiqueta uso tabIndex -1
-        IDEnUso = miFormulario.agregarMiembro(texto, 1, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 0, -1, -1, "Plain");
+        IDEnUso = miFormulario.agregarMiembro(texto, 1, 1, 100, 20, "Arial", Color.BLACK.getRGB(), 12, 0, idCampo, -1, "Plain");
         agregarEtiqueta(texto, IDEnUso);
         llenarDatosMiembro(IDEnUso);
     }

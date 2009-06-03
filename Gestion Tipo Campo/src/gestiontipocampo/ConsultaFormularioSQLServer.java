@@ -142,7 +142,6 @@ public class ConsultaFormularioSQLServer extends ConsultaFormulario {
     }
 
 
-    //**************************Debo seguir aca.....(es para no perderme XD)
     /**
      * Obtiene todos los miembros del formulario y los retorna dentro de un vector
      * @param correlativoFormulario

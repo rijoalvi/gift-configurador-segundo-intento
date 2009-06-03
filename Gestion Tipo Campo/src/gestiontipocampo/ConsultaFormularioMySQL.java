@@ -141,8 +141,6 @@ public class ConsultaFormularioMySQL extends ConsultaFormulario {
         return campos;
     }
 
-
-    //**************************Debo seguir aca.....(es para no perderme XD)
     /**
      * Obtiene todos los miembros del formulario y los retorna dentro de un vector
      * @param correlativoFormulario

@@ -59,8 +59,6 @@ public class Formulario {
      */
     public Vector cargarMiembros() {
         Vector miembros = formBD.obtenerMiembros(correlativo);
-
-
         /////////lleva la cuenta de por cual valor del vector va....
         int indice = 0;
         while (indice < miembros.size()) {

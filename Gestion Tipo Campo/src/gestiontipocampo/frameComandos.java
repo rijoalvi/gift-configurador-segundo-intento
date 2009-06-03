@@ -187,7 +187,7 @@ public class frameComandos extends javax.swing.JFrame {
 
         comboAccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboAccion.setName("comboAccion"); // NOI18N
-        comboAccion.setBounds(0, 0, 150, -1);
+        comboAccion.setBounds(0, 0, 150, 20);
         paneAccionCombo.add(comboAccion, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         paneAccionCombo.setBounds(0, 0, 150, 50);
@@ -197,7 +197,7 @@ public class frameComandos extends javax.swing.JFrame {
 
         fieldAccion.setText(resourceMap.getString("fieldAccion.text")); // NOI18N
         fieldAccion.setName("fieldAccion"); // NOI18N
-        fieldAccion.setBounds(0, 0, 150, -1);
+        fieldAccion.setBounds(0, 0, 150, 20);
         paneAccionField.add(fieldAccion, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         paneAccionField.setBounds(0, 0, 160, 50);
@@ -218,6 +218,11 @@ public class frameComandos extends javax.swing.JFrame {
         paneComandoMascara.add(labelCondicionInicial, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         comboCampoInicial.setName("comboCampoInicial"); // NOI18N
+        comboCampoInicial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboCampoInicialActionPerformed(evt);
+            }
+        });
         comboCampoInicial.setBounds(10, 50, 130, 20);
         paneComandoMascara.add(comboCampoInicial, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -233,7 +238,7 @@ public class frameComandos extends javax.swing.JFrame {
 
         comboEfecto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboEfecto.setName("comboEfecto"); // NOI18N
-        comboEfecto.setBounds(0, 0, 150, -1);
+        comboEfecto.setBounds(0, 0, 150, 20);
         paneEfectoCombo.add(comboEfecto, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         paneEfectoCombo.setBounds(0, 0, 150, 50);
@@ -290,6 +295,11 @@ public class frameComandos extends javax.swing.JFrame {
 
         comboSeleccionFormulario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         comboSeleccionFormulario.setName("comboSeleccionFormulario"); // NOI18N
+        comboSeleccionFormulario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboSeleccionFormularioActionPerformed(evt);
+            }
+        });
         comboSeleccionFormulario.setBounds(10, 30, 180, 20);
         paneComandosFaciles.add(comboSeleccionFormulario, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -454,6 +464,34 @@ public class frameComandos extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonCancelarActionPerformed
 
+    private void comboCampoInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCampoInicialActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboCampoInicialActionPerformed
+
+    private void comboSeleccionFormularioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSeleccionFormularioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboSeleccionFormularioActionPerformed
+    private void llenarCombosDificiles(){
+        ControladorBD buscador = new ControladorBD();
+        javax.swing.DefaultComboBoxModel modelo = new javax.swing.DefaultComboBoxModel( );
+        modelo = (DefaultComboBoxModel) comboCampoInicial.getModel();
+
+        //HAGAN DOCUMENTACION PARA NO TENER QUE BATIAR Q PUTAS HACE CADA COSA Q AGREGAN! - ALBERTO
+        try {
+            ResultSet resultado = buscador.getResultSet("select nombre,IDTipoCampo from MIEMBROFORMULARIO WHERE IDFORMULARIO = ;");
+
+            while (resultado.next()) {
+                modelo.addElement(resultado.getObject(2).toString());
+                correlativo.add(resultado.getObject(1));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("*SQL Exception: *" + e.toString());
+        }
+
+        comboSeleccionFormulario.setModel(modelo);
+        comboSeleccionFormulario.setVisible(true);
+    }
     /**
     * @param args the command line arguments
     */

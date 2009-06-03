@@ -47,7 +47,7 @@ public class frameLista extends javax.swing.JFrame {
     }
 
     public void actualizarLista() {
-        if (miLista.ordenPersonalizado==true) {
+        if (miLista.ordenPersonalizado == true) {
             SidePanel.setVisible(true);
         } else {
             SidePanel.setVisible(false);
@@ -484,7 +484,7 @@ public class frameLista extends javax.swing.JFrame {
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
 
         if (miLista.getMiembroListaSet().contains(new MiDato(campoEntrada.getText(), 0))) {
-            
+
             JOptionPane.showMessageDialog(null, "Ya existe un elemento con ese nombre.");
         } else {
             if (modificando) {
@@ -554,7 +554,7 @@ public class frameLista extends javax.swing.JFrame {
         return ID;
     }
 
-        @org.jdesktop.application.Action
+    @org.jdesktop.application.Action
     public void botonOrdenPersonalizado() {
         if (botonPersonalizado.isSelected()) {
             miLista.setConOrdenPersonalizado(true);

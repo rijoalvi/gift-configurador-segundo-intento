@@ -81,7 +81,7 @@ public class Formulario {
                     miembros.get(indice++).toString());
             miembrosFormulario.add(datoNuevo);
         }
-        return miembros
+        return miembros;
     }
 
     /**
@@ -245,7 +245,7 @@ public class Formulario {
         formBD.modificarDescripcion(nombre, correlativo);
     }
 
-    public int getCorrelativo(){
+    public int getCorrelativo() {
         return correlativo;
     }
 
@@ -263,7 +263,7 @@ public class Formulario {
      * @param ID de la lista
      * @return lista de miembros de la lista
      */
-    public String[] getLista(int ID){
+    public String[] getLista(int ID) {
         return formBD.obtenerListaDeLista(ID);
     }
 }

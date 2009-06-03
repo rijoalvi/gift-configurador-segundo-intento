@@ -55,6 +55,10 @@ public class frameComandos extends javax.swing.JFrame {
         }
         comboSeleccionFormulario.setModel(modelo);
         comboSeleccionFormulario.setVisible(true);
+
+        mainPane.setVisible(true);
+        paneComandoMascara.setVisible(false);
+        paneComandosFaciles.setVisible(true);
         /*comboSeleccionFormulario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));*/
     }
 
@@ -64,6 +68,7 @@ public class frameComandos extends javax.swing.JFrame {
         ControladorBD miPrueba = new ControladorBD();
         comandoActual = new Comando(); // Clase comando con la que trabajara la interfaz!
         correlativo = new Vector();
+        IDForm = correlativoFormulario;
         javax.swing.DefaultComboBoxModel modelo = new javax.swing.DefaultComboBoxModel( );
         modelo = (DefaultComboBoxModel) comboSeleccionFormulario.getModel();
 
@@ -88,6 +93,9 @@ public class frameComandos extends javax.swing.JFrame {
         comboSeleccionFormulario.setModel(modelo);
         comboSeleccionFormulario.setVisible(true);
         comboSeleccionFormulario.setSelectedIndex(posicion);
+        mainPane.setVisible(true);
+        paneComandoMascara.setVisible(false);
+        paneComandosFaciles.setVisible(true);
         /*comboSeleccionFormulario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));*/
     }
     /** This method is called from within the constructor to
@@ -285,6 +293,11 @@ public class frameComandos extends javax.swing.JFrame {
 
         botonCancelar.setText(resourceMap.getString("botonCancelar.text")); // NOI18N
         botonCancelar.setName("botonCancelar"); // NOI18N
+        botonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonCancelarActionPerformed(evt);
+            }
+        });
 
         botonAceptar.setText(resourceMap.getString("botonAceptar.text")); // NOI18N
         botonAceptar.setName("botonAceptar"); // NOI18N
@@ -351,31 +364,61 @@ public class frameComandos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
-        int correlativoFormulario = Integer.parseInt(correlativo.get(this.comboSeleccionFormulario.getSelectedIndex()).toString());
-        String nombreFormulario = this.comboSeleccionFormulario.getSelectedItem().toString();
         
+        String nombreFormulario = this.comboSeleccionFormulario.getSelectedItem().toString();        
+        //Se inicializan los campos del Comando
+        comandoActual.setIDFormulario(IDForm);
+        comandoActual.setIDFormularioTrabajar( getIDFormulario( nombreFormulario) );
         comandoActual.setDescripcion(this.fieldDescripcion.getText());
         comandoActual.setNombre(this.fieldNombre.getText());
         comandoActual.setTipoComando(this.comboTipo.getSelectedIndex()+1);
 
-
-        if(this.paneComandosFaciles.isVisible()){
-           
-        }else{
-
-
+        //Comandos con máscara
+        if( comandoActual.getTipoComando() == 4){
+            //ComandoMascara (IDComando,TipoCampoInicial,CondicionInicial,TipoCampoFinal,EstadoFinal)
+            comandoActual.setTipoCampoInicial( comboCampoInicial.getSelectedItem().toString() );
+            comandoActual.setCondicionInicial( comboAccion.getSelectedItem().toString() );
+            comandoActual.setTipoCampoFinal( comboCampoFinal.getSelectedItem().toString() );
+            comandoActual.setCondicionFinal( comboEfecto.getSelectedItem().toString() );
+            comandoActual.guardarComando();
         }
+        //comandos "faciles"
+        else{
+            //(int CorrelativoFOrmulario, String NombreComando, String DescripcionComando, int tipoComando, int correlativoFormularioATrabajar, String fechaActualizacion){
+            comandoActual.guardarComando();
+        }
+        this.dispose();
     }//GEN-LAST:event_botonAceptarActionPerformed
 
+    private int getIDFormulario( String nombreForm){
+        int ID = -1;
+        ControladorBD contr = new ControladorBD();
+        try {
+            ResultSet resultado = contr.getResultSet("select correlativo from FORMULARIO where nombre = '"+nombreForm+"' ;");
+            resultado.next();
+            ID = Integer.parseInt(resultado.getObject("correlativo").toString());
+        } catch (SQLException e) {
+            System.out.println("*SQL Exception: *" + e.toString());
+        }
+        return ID;
+    }
+
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
+        this.mainPane.setVisible(true);
         if(comboTipo.getSelectedIndex()!=3){
             this.paneComandoMascara.setVisible(false);
             this.paneComandosFaciles.setVisible(true);
         }else{
             this.paneComandoMascara.setVisible(true);
             this.paneComandosFaciles.setVisible(false);
+            //temporal!!!
+            this.botonAgregarAccion.setVisible(false);
         }
     }//GEN-LAST:event_comboTipoActionPerformed
+
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_botonCancelarActionPerformed
 
     /**
     * @param args the command line arguments
@@ -423,4 +466,5 @@ public class frameComandos extends javax.swing.JFrame {
     private javax.swing.JLayeredPane paneEfectoField;
     // End of variables declaration//GEN-END:variables
 
+    private int IDForm;
 }

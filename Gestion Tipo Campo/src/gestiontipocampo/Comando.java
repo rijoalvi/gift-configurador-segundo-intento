@@ -37,6 +37,7 @@ public class Comando  {
     public Comando() {
         buscador = new ControladorBD();
         consultaComando=buscador.getConsultaComando();
+        this.IDComando = -1;
         this.nombreComando = "";
         this.tipoComando = 0;
         this.descripcion = "";
@@ -50,6 +51,24 @@ public class Comando  {
     public void setNombre(String name){
         this.nombreComando = name;
     }
+    
+    public void setIDComando(int ID){
+        this.IDComando = ID;
+    }
+    
+    public int getIDComando(){
+        return IDComando;
+    }
+    
+    public void setIDFormulario(int ID){
+        this.IDFormulario = ID;
+    }
+    
+    public int getIDFormulario(){
+        return IDFormulario;
+    }
+
+
 
     public void setIDFormularioTrabajar(int idForm){
         this.IDFormularioTrabajar = idForm;
@@ -130,16 +149,15 @@ public class Comando  {
         return(this.facil);
     }
 
-    public void guardarComando(){
-        
+    public void guardarComando(){        
         if(facil){
-            consultaComando.agregarComandoSinMascara(IDFormulario, nombreComando, descripcion, tipoComando , IDFormularioTrabajar,"fecha");
-            //agregarComandoSinMascara(int CorrelativoFOrmulario, getNombre(), getDescripcion(), getTipoComando, int correlativoFormularioATrabajar, String fechaActualizacion)
+            this.IDComando = consultaComando.agregarComando(IDFormulario, nombreComando, descripcion, tipoComando , IDFormularioTrabajar,"fecha");
         }
         else{
+            //Si es la primer accion que se agrega, se debe agregar el comando primero
+            if(IDComando == -1 )
+                this.IDComando = consultaComando.agregarComando(IDFormulario, nombreComando, descripcion, tipoComando , IDFormularioTrabajar,"fecha");
             consultaComando.agregarComandoConMascara(IDComando, tipoCampoInicial, condicionInicial, tipoCampoFinal, estadoFinal);
-            
-               //agregarComandoConMascara(...)
         }
     }
 }

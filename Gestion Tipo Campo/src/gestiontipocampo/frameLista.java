@@ -12,6 +12,7 @@ package gestiontipocampo;
 
 import javax.swing.*;
 import java.*;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -240,6 +241,9 @@ public class frameLista extends javax.swing.JFrame {
             }
         });
         campoEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                campoEntradaKeyPressed(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 campoEntradaKeyTyped(evt);
             }
@@ -482,7 +486,37 @@ public class frameLista extends javax.swing.JFrame {
     }//GEN-LAST:event_campoEntradaInputMethodTextChanged
 
     private void botonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarActionPerformed
+        agregarElemento();
+    }//GEN-LAST:event_botonAgregarActionPerformed
 
+    public void setConfiguracionBase() {
+        campoEntrada.setText("");
+        campoEntrada.requestFocus();
+        botonAgregar.setEnabled(false);
+        botonBorrar.setEnabled(false);
+        botonPorDefecto.setEnabled(false);
+    }
+
+    private void campoEntradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoEntradaKeyTyped
+        if (!this.modificando) {
+            lista.clearSelection();
+        }
+        botonAgregar.setEnabled(true);
+        if (campoEntrada.getText().trim().isEmpty()) {
+            botonAgregar.setEnabled(false);
+        }
+    }//GEN-LAST:event_campoEntradaKeyTyped
+
+    private void botonTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTopActionPerformed
+    }//GEN-LAST:event_botonTopActionPerformed
+
+    private void campoEntradaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoEntradaKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            agregarElemento();
+        }
+    }//GEN-LAST:event_campoEntradaKeyPressed
+
+    private void agregarElemento() {
         if (miLista.getMiembroListaSet().contains(new MiDato(campoEntrada.getText(), 0))) {
 
             JOptionPane.showMessageDialog(null, "Ya existe un elemento con ese nombre.");
@@ -506,28 +540,7 @@ public class frameLista extends javax.swing.JFrame {
             botonAgregar.setText("Agregar");
         }
         campoEntrada.requestFocus();
-    }//GEN-LAST:event_botonAgregarActionPerformed
-
-    public void setConfiguracionBase() {
-        campoEntrada.setText("");
-        campoEntrada.requestFocus();
-        botonAgregar.setEnabled(false);
-        botonBorrar.setEnabled(false);
-        botonPorDefecto.setEnabled(false);
     }
-
-    private void campoEntradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoEntradaKeyTyped
-        if (!this.modificando) {
-            lista.clearSelection();
-        }
-        botonAgregar.setEnabled(true);        // TODO add your handling code here:
-        if (campoEntrada.getText().trim().isEmpty()) {
-            botonAgregar.setEnabled(false);
-        }
-    }//GEN-LAST:event_campoEntradaKeyTyped
-
-    private void botonTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonTopActionPerformed
-    }//GEN-LAST:event_botonTopActionPerformed
 
     /**
      * @param args the command line arguments

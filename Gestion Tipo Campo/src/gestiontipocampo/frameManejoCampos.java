@@ -61,6 +61,30 @@ public class frameManejoCampos extends javax.swing.JFrame {
         }
     }
 
+    public frameManejoCampos(String tipo, GestionTipoCampoView padre) {
+        initComponents();
+        postInitComponents();
+        ocultarPanes();
+        this.padre = padre;
+        //Se revisa si se debe abrir con algun valor o si es para ingresar valores nuevos
+        if (tipo.equalsIgnoreCase("nuevo")) {
+            //No se deben mostrar los botones de borrar ni guardar como
+            botonBorrar.setVisible(false);
+            botonGuardarComo.setVisible(false);
+            botonBusqueda.setVisible(false);
+            valorBusqueda.setVisible(false);
+            jLabel20.setVisible(false);
+        } else {
+            if (tipo.equalsIgnoreCase("abrir")) {
+                //Se deben mostrar los botones de borrar ni guardar como
+                botonBorrar.setVisible(true);
+                botonGuardarComo.setVisible(true);
+                comboTipos.setEnabled(false);
+                valorNombreGeneral.setEditable(false);
+            }
+        }
+    }
+
     /**
      * Constructor que viene de abrir un dato en el tree view
      */
@@ -836,6 +860,7 @@ public class frameManejoCampos extends javax.swing.JFrame {
         botonBorrar.setSize(63, 20);
         botonCerrar.setSize(63, 23);
         comboTipos.setSize(95, 20);
+        padre = null;
     }
 
     /**
@@ -861,7 +886,8 @@ public class frameManejoCampos extends javax.swing.JFrame {
                 break;
             case FECHAHORA: //HashCode para FechaHora
                 if (this.valorFechaDefecto.getText().isEmpty() ||
-                        this.valorPreaviso.getText().isEmpty()) {
+                        (this.valorPreaviso.getText().isEmpty() &&
+                        this.radioFechaHoraSi.isSelected())) {
                     alerta = true;
                 }
                 break;
@@ -1179,14 +1205,16 @@ private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
                 System.out.println("abre lista de ID: " + ID);
                 frameLista fLista = new frameLista(ID);
                 fLista.setVisible(true);
-                this.dispose();
                 //limpiarCamposLista();
                 break;
             default: //Si se selecciona algo raro o el campito en blanco.
-
                 break;
         }
-    //this.dispose(); //Se cierra la ventana... No me parece hacer esto, por eso lo comente: Alberto
+
+        if (padre != null) {
+            padre.llenarTreeView();
+        }
+        //this.dispose();
     }
 
     public void limpiarValoresNumero() {
@@ -1588,4 +1616,5 @@ private void comboCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JTextField valorValorDefectoNumero;
     private javax.swing.JTextField valorValorInicial;
     // End of variables declaration//GEN-END:variables
+    private GestionTipoCampoView padre;
 }

@@ -115,7 +115,7 @@ public class GestionTipoCampoView extends FrameView {
 
     @Action
     public void mostrarVentanaManejoCampos() {
-        frameManejoCampos ventanaManejoCampos = new frameManejoCampos("nuevo");
+        frameManejoCampos ventanaManejoCampos = new frameManejoCampos("nuevo", this);
         JFrame mainFrame = GestionTipoCampoApp.getApplication().getMainFrame();
         //coloca el frame segun como este ubicada la ventana principal
         ventanaManejoCampos.setLocationRelativeTo(mainFrame);

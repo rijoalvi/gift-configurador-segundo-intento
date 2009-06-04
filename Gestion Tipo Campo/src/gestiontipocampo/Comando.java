@@ -11,28 +11,29 @@ package gestiontipocampo;
  */
 public class Comando  {
     
-    protected int IDComando;
-    protected String nombreComando; //El nombre del comando
-    protected int tipoComando;      //El tipo (creacion, con mascara, etc)
-    protected String descripcion;   //La descripcion
-    protected boolean facil; //Aqui diferenciamos si es con mascara o es de los faciles. Si es facil es true, si es con mascara es false
+    public int IDComando;
+    public String nombreComando; //El nombre del comando
+    public int tipoComando;      //El tipo (creacion, con mascara, etc)
+    public String descripcion;   //La descripcion
+    public boolean conMascara;
+    public boolean facil; //Aqui diferenciamos si es con mascara o es de los faciles. Si es facil es true, si es con mascara es false
 
     //ESTA ES LA OPCIÓN DE COMANDOS DE CREAR, BORRAR O MODIFICAR
-    protected String formDestino;   //El formulario que voy a crear/borrar/modificar (si es el caso)
+    public String formDestino;   //El formulario que voy a crear/borrar/modificar (si es el caso)
 
     //ESTA ES LA OPCIÓN DE COMANDO CON MÁSCARA
-    protected int IDFormulario;
+    public int IDFormulario;
 
 
-    protected String tipoCampoInicial;
-    protected String condicionInicial;
-    protected String tipoCampoFinal;
-    protected String condicionFinal;
+    public String tipoCampoInicial;
+    public String condicionInicial;
+    public String tipoCampoFinal;
+    public String condicionFinal;
     
-    protected String estadoFinal;
-    protected int IDFormularioTrabajar;
-    protected ControladorBD buscador;
-    protected ConsultaComando consultaComando; //controlador BD de comando
+    public String estadoFinal;
+    public int IDFormularioTrabajar;
+    public ControladorBD buscador;
+    public ConsultaComando consultaComando; //controlador BD de comando
 
     public Comando() {
         buscador = new ControladorBD();
@@ -150,13 +151,14 @@ public class Comando  {
     }
 
     public void guardarComando(){        
-        if(facil){
+        if(!conMascara){
             this.IDComando = consultaComando.agregarComando(IDFormulario, nombreComando, descripcion, tipoComando , IDFormularioTrabajar,"fecha");
+            System.out.print("Comando sin máscara agregado");
         }
         else{
             //Si es la primer accion que se agrega, se debe agregar el comando primero
-            if(IDComando == -1 )
-                this.IDComando = consultaComando.agregarComando(IDFormulario, nombreComando, descripcion, tipoComando , IDFormularioTrabajar,"fecha");
+            //if(IDComando == -1 )
+            //    this.IDComando = consultaComando.agregarComando(IDFormulario, nombreComando, descripcion, tipoComando , IDFormularioTrabajar,"fecha");
             consultaComando.agregarComandoConMascara(IDComando, tipoCampoInicial, condicionInicial, tipoCampoFinal, estadoFinal);
         }
     }

@@ -39,6 +39,7 @@ public class frameComandos extends javax.swing.JFrame {
 
     /** Creates new form frameComandos */
     Comando comandoActual;
+    int ConMascara=0;
     Formulario formularioActual;
     /******esta es para saber cual es el correlativo del i-esimo elemento del comboBox******/
     Vector correlativo;
@@ -93,6 +94,7 @@ public class frameComandos extends javax.swing.JFrame {
     /*Constructor que recive el correlativo del formulario con el que iniciara*/
     public frameComandos(Formulario datosForm, int correlativoFormulario) {
         initComponents();
+        ocultarCamposConMascara();
         javax.swing.DefaultComboBoxModel modelo = new javax.swing.DefaultComboBoxModel();
                modelo = (DefaultComboBoxModel) comboSeleccionFormulario.getModel();
 
@@ -192,9 +194,15 @@ public class frameComandos extends javax.swing.JFrame {
         labelCondFinal = new javax.swing.JLabel();
         fieldEfecto = new javax.swing.JTextField();
         botonAgregarAccion = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         labelNombre.setLabelFor(fieldNombre);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(gestiontipocampo.GestionTipoCampoApp.class).getContext().getResourceMap(frameComandos.class);
@@ -257,6 +265,11 @@ public class frameComandos extends javax.swing.JFrame {
         labelCampoInicial.setLabelFor(comboCampoInicial);
         labelCampoInicial.setText(resourceMap.getString("labelCampoInicial.text")); // NOI18N
         labelCampoInicial.setName("labelCampoInicial"); // NOI18N
+        labelCampoInicial.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                labelCampoInicialMouseClicked(evt);
+            }
+        });
 
         comboCampoInicial.setName("comboCampoInicial"); // NOI18N
         comboCampoInicial.addActionListener(new java.awt.event.ActionListener() {
@@ -286,102 +299,121 @@ public class frameComandos extends javax.swing.JFrame {
 
         botonAgregarAccion.setText(resourceMap.getString("botonAgregarAccion.text")); // NOI18N
         botonAgregarAccion.setName("botonAgregarAccion"); // NOI18N
+        botonAgregarAccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAgregarAccionActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setName("jButton1"); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelSeleccionFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboSeleccionFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(labelCampoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(210, 210, 210)
+                            .addComponent(fieldAccion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelCondicionInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelCampoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(160, 160, 160)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelCampoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelCondFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelCampoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(comboCampoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(fieldEfecto, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(comboCampoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(206, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(labelCondicionInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(comboCampoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(fieldAccion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelNombre)
-                            .addComponent(fieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonAgregarAccion, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelTipo)
-                                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(57, 57, 57)
+                                    .addComponent(labelNombre)
+                                    .addComponent(fieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(45, 45, 45)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelDescripcion)
-                                    .addComponent(fieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(306, Short.MAX_VALUE)
-                .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67))
+                                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(labelTipo)))
+                            .addComponent(labelSeleccionFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelDescripcion))
+                        .addContainerGap(68, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(60, 60, 60)
+                        .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jButton1)
+                        .addGap(98, 98, 98)
+                        .addComponent(botonAgregarAccion, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(comboSeleccionFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(519, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelNombre)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelNombre)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(labelSeleccionFormulario))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelTipo)
                             .addComponent(labelDescripcion))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fieldDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labelSeleccionFormulario)
+                            .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(comboSeleccionFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCondicionInicial)
-                    .addComponent(labelCondFinal))
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelCampoFinal)
+                    .addComponent(labelCampoInicial))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCampoInicial)
-                    .addComponent(labelCampoFinal))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboCampoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(comboCampoFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelCondFinal)
+                    .addComponent(labelCondicionInicial))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(fieldEfecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(78, 78, 78)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fieldAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fieldEfecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
-                .addComponent(botonAgregarAccion)
-                .addGap(96, 96, 96)
+                    .addComponent(botonAgregarAccion)
+                    .addComponent(jButton1))
+                .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAceptar)
                     .addComponent(botonCancelar))
-                .addGap(58, 58, 58))
+                .addGap(91, 91, 91))
         );
 
         pack();
@@ -426,14 +458,41 @@ public class frameComandos extends javax.swing.JFrame {
     }
 
     private void botonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptarActionPerformed
+    // TODO add your handling code here:
+        //String nombreFormulario = ((MiDato)this.comboSeleccionFormulario.getSelectedItem()).nombre;
+        //Se inicializan los campos del Comando
 
+        comandoActual.IDFormulario=((MiDato)this.comboSeleccionFormulario.getSelectedItem()).ID;
+        comandoActual.IDFormularioTrabajar=comandoActual.IDFormulario;//este no sé para que es, en el script del profe no se usa
+        comandoActual.descripcion=this.fieldDescripcion.getText();
+        comandoActual.nombreComando=this.fieldNombre.getText();
+        comandoActual.setTipoComando(this.comboTipo.getSelectedIndex() + 1);
+        comandoActual.conMascara=false;
+comandoActual.guardarComando();
+
+        if(ConMascara==1){
+            comandoActual.condicionInicial=fieldAccion.getText();
+            comandoActual.estadoFinal=fieldEfecto.getText();
+            comandoActual.tipoCampoInicial=((MiDato)comboCampoInicial.getSelectedItem()).nombre;
+            comandoActual.tipoCampoFinal=((MiDato)comboCampoFinal.getSelectedItem()).nombre;
+            comandoActual.IDComando=999;///Esto es lo unico que hace falta arreglar esto
+        }
+                comandoActual.conMascara=true;
+        comandoActual.guardarComando();
+  
+        
+        
+        
+        
+        
+        /*
         String nombreFormulario = this.comboSeleccionFormulario.getSelectedItem().toString();
         //Se inicializan los campos del Comando
         comandoActual.setIDFormulario(IDForm);
         comandoActual.setIDFormularioTrabajar(getIDFormulario(nombreFormulario));
         comandoActual.setDescripcion(this.fieldDescripcion.getText());
         comandoActual.setNombre(this.fieldNombre.getText());
-        comandoActual.setTipoComando(this.comboTipo.getSelectedIndex() + 1);
+        comandoActual.setTipoComando(this.comboTipo.getSelectedIndex() + 1);*/
 
         //Comandos con máscara
         /*if (comandoActual.getTipoComando() == 4) {
@@ -466,9 +525,16 @@ public class frameComandos extends javax.swing.JFrame {
 
     private void comboTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoActionPerformed
 
-            //temporal!!!
-           // this.botonAgregarAccion.setVisible(false);
+    //if(ConMascara==0){
+        if(!comboTipo.getSelectedItem().toString().equalsIgnoreCase("Comando con Máscara")){
+        ocultarCamposConMascara();
 
+        ConMascara=0;
+    }
+    else{
+    aparecerCamposConMascara();
+        ConMascara=1;
+    }
     }//GEN-LAST:event_comboTipoActionPerformed
 
     private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
@@ -476,49 +542,18 @@ public class frameComandos extends javax.swing.JFrame {
     }//GEN-LAST:event_botonCancelarActionPerformed
 
     private void comboCampoInicialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboCampoInicialActionPerformed
-        int idCampoEtiqueta = Integer.parseInt(this.IDEtiquetaCampo.get(this.comboCampoInicial.getSelectedIndex()).toString());
-        
-        /*con el idEtiqueta se tiene acceso al idCampo, entonces lo que hay que hacer es buscar
-         en bd el tipo de campo de los valores asociados a la etiqueta
-         algo como ====== "select tipoCampo from miembroFormulario where IDCampo = "+idEtiquetaCampo+" and IDTipoCampo != 0"
-         diferente de 0 para que no escoga la etiqueta */
-        
-
-        int TipoSeleccionado = 0;// y poner el primer resultado aqui.....
-        
-        
-        
-        if (TipoSeleccionado==4/*"Texto"*/ || TipoSeleccionado==5/*"Incremental"*/ ||
-            TipoSeleccionado==1/*("Numero") */|| TipoSeleccionado==3/*("FechaHora") */||
-            TipoSeleccionado==6/*("Jerarquia") */){
-  
-        } else {
-          
-           
-
-            if (TipoSeleccionado==7/*"Lista"*/) {
-               ///////////////CARGAR LOS DATOS DE LA LISTA EN EL COMBOBOX
-
-            }
-            if(TipoSeleccionado==2/*("Binario")*/){
-            ///////////////CARGAR LOS DATOS DEL BINARIO EN EL COMBOBOX
-            }
-
-        }
 
     }//GEN-LAST:event_comboCampoInicialActionPerformed
 
     private void comboSeleccionFormularioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboSeleccionFormularioActionPerformed
     System.out.print("asdfasdf"+"  "+((MiDato)comboSeleccionFormulario.getSelectedItem()).ID);        // TODO add your handling code here:
 
-
         javax.swing.DefaultComboBoxModel modelo = new javax.swing.DefaultComboBoxModel();
-               modelo = (DefaultComboBoxModel) comboSeleccionFormulario.getModel();
+        modelo.removeAllElements();
 
-modelo.removeAllElements();
-        comandoActual = new Comando(); // Clase comando con la que trabajara la interfaz!
-
-
+        javax.swing.DefaultComboBoxModel modelo2 = new javax.swing.DefaultComboBoxModel();
+        modelo2.removeAllElements();
+        comandoActual = new Comando(); // Clase comando con la que trabajara la interfaz
 
         formularioActual= new Formulario();
         Vector forms = new Vector();
@@ -532,10 +567,12 @@ modelo.removeAllElements();
 
 
             modelo.addElement(new MiDato(nombreForm, id));
+            modelo2.addElement(new MiDato(nombreForm, id));
 
         }
 
  comboCampoInicial.setModel(modelo);
+  comboCampoFinal.setModel(modelo2);
 
 
     }//GEN-LAST:event_comboSeleccionFormularioActionPerformed
@@ -545,6 +582,70 @@ private void comboCampoFinalActionPerformed(java.awt.event.ActionEvent evt) {//G
 
 
 }//GEN-LAST:event_comboCampoFinalActionPerformed
+
+private void botonAgregarAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarAccionActionPerformed
+    // TODO add your handling code here:
+        //String nombreFormulario = ((MiDato)this.comboSeleccionFormulario.getSelectedItem()).nombre;
+        //Se inicializan los campos del Comando
+
+        comandoActual.IDFormulario=((MiDato)this.comboSeleccionFormulario.getSelectedItem()).ID;
+        comandoActual.IDFormularioTrabajar=comandoActual.IDFormulario;//este no sé para que es, en el script del profe no se usa
+        comandoActual.descripcion=this.fieldDescripcion.getText();
+        comandoActual.nombreComando=this.fieldNombre.getText();
+        comandoActual.setTipoComando(this.comboTipo.getSelectedIndex() + 1);
+        comandoActual.conMascara=false;
+comandoActual.guardarComando();
+
+        if(ConMascara==1){
+            comandoActual.condicionInicial=fieldAccion.getText();
+            comandoActual.estadoFinal=fieldEfecto.getText();
+            comandoActual.tipoCampoInicial=((MiDato)comboCampoInicial.getSelectedItem()).nombre;
+            comandoActual.tipoCampoFinal=((MiDato)comboCampoFinal.getSelectedItem()).nombre;
+            comandoActual.IDComando=999;///Esto es lo unico que hace falta arreglar esto
+        }
+                comandoActual.conMascara=true;
+        comandoActual.guardarComando();
+
+}//GEN-LAST:event_botonAgregarAccionActionPerformed
+
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    if(ConMascara==0){
+        aparecerCamposConMascara();
+        ConMascara=1;
+    }
+    else{
+    ocultarCamposConMascara();
+        ConMascara=0;
+    }
+}//GEN-LAST:event_jButton1ActionPerformed
+
+private void ocultarCamposConMascara(){
+    comboCampoInicial.setVisible(false);
+    comboCampoFinal.setVisible(false);
+    fieldAccion.setVisible(false);
+    fieldEfecto.setVisible(false);
+    labelCampoFinal.setVisible(false);
+    labelCampoInicial.setVisible(false);
+    labelCondicionInicial.setVisible(false);
+    labelCondFinal.setVisible(false);
+}
+private void aparecerCamposConMascara(){
+        comboCampoInicial.setVisible(true);
+        comboCampoFinal.setVisible(true);
+        fieldAccion.setVisible(true);
+        fieldEfecto.setVisible(true);
+        labelCampoFinal.setVisible(true);
+         labelCampoInicial.setVisible(true);
+    labelCondicionInicial.setVisible(true);
+    labelCondFinal.setVisible(true);
+}
+private void labelCampoInicialMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labelCampoInicialMouseClicked
+    // TODO add your handling code here:
+}//GEN-LAST:event_labelCampoInicialMouseClicked
+
+private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+ocultarCamposConMascara();    // TODO add your handling code here:
+}//GEN-LAST:event_formComponentShown
     private void llenarCombosDificiles() {
         ControladorBD buscador = new ControladorBD();
         javax.swing.DefaultComboBoxModel modelo = new javax.swing.DefaultComboBoxModel();
@@ -592,6 +693,7 @@ private void comboCampoFinalActionPerformed(java.awt.event.ActionEvent evt) {//G
     private javax.swing.JTextField fieldDescripcion;
     private javax.swing.JTextField fieldEfecto;
     private javax.swing.JTextField fieldNombre;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel labelCampoFinal;
     private javax.swing.JLabel labelCampoInicial;
     private javax.swing.JLabel labelCondFinal;

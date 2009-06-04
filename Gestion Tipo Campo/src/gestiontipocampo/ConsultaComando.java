@@ -53,7 +53,7 @@ public class ConsultaComando extends ControladorBD{
 
     public int agregarComandoConMascaraYObtenerID(int IDComando, String TipoCampoInicial,String CondicionInicial,String TipoCampoFinal,String EstadoFinal){
         //INSERT INTO ComandoMascara (IDComando,TipoCampoInicial,CondicionInicial,TipoCampoFinal,EstadoFinal) VALUES (1,'tipoCampoInicial','condicion inicial','campoFinal','dsfa');
-        this.doUpdate("INSERT INTO COMANDOMASCARA (IDComando,TipoCampoInicial,CondicionInicial,TipoCampoFinal,EstadoFinal) VALUES ("+IDComando+",'"+TipoCampoInicial+"','"+CondicionInicial+"','"+TipoCampoFinal+"','"+EstadoFinal+"');");
+        this.doUpdate("INSERT INTO  COMANDOMASCARA (IDComando,TipoCampoInicial,CondicionInicial,TipoCampoFinal,EstadoFinal) VALUES ("+IDComando+",'"+TipoCampoInicial+"','"+CondicionInicial+"','"+TipoCampoFinal+"','"+EstadoFinal+"');");
 
 
         return 0;

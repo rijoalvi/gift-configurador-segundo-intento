@@ -36,6 +36,16 @@ public class Formulario {
     }
 
     /**
+     *
+     * @param nombre
+     * @param desc
+     */
+    public Formulario() {
+        buscador = new ControladorBD();
+        formBD = buscador.getConsultaFormulario();
+    }
+
+    /**
      * Crea un nuevo Formulario extrayendo los datos de la base de datos por medio de la clase consultaFormulario
      * @param correlativo el correlativo del Formulario en la base de datos
      */
@@ -54,6 +64,22 @@ public class Formulario {
 
     }
 
+
+
+    /**
+     *
+     * @param
+     */
+    public Vector getTodosLosFormulario() {
+        Vector datos = this.formBD.obtenerTodosLosFormularios();
+        return datos;
+    }
+
+
+    public Vector getMiembrosFormularioPorID(int idFormulario) {
+        Vector datos = this.formBD.obtenerMiembrosFormularios(idFormulario);
+        return datos;
+    }
     /**
      * Carga y crea los miembros en miembrosFormulario
      */

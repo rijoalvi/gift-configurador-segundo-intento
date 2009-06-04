@@ -7,7 +7,7 @@ package gestiontipocampo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-
+import java.util.Map;
 /**
  *
  * @author Alberto
@@ -20,6 +20,64 @@ public abstract class ConsultaFormulario extends ControladorBD {
      * @param descripcion
      * @return el ID del formulario creado
      */
+
+
+        /**
+     * Retorna todos los formularios en un vector como para cargarlos en un combo
+     * @param correlativo
+     * @return Vector con los datos del formulario en este orden: correlativo, nombre
+     */
+    public Vector obtenerTodosLosFormularios() {
+
+         Vector campos = new Vector();
+        ResultSet resultado = null;
+
+            //int tipoCampo;
+            try {
+            resultado = this.getResultSet("select correlativo, nombre from FORMULARIO;" );         
+            while (resultado.next()) {
+                campos.add(resultado.getObject("correlativo").toString());
+                campos.add(resultado.getObject("nombre").toString());
+
+                }
+
+
+
+        } catch (SQLException e) {
+            System.out.println("*SQL Exception: *" + e.toString());
+        }
+        return campos;
+    }
+
+        /**
+     * Retorna todos los tipo campos contenidos en un formulario
+     * @param idFormulario
+     * @return Vector con todos los tipo campos con este orde: correlativo, nombre
+     */
+    public Vector obtenerMiembrosFormularios(int idFormulario) {
+
+         Vector campos = new Vector();
+        ResultSet resultado = null;
+
+            //int tipoCampo;
+            try {
+            resultado = this.getResultSet("select correlativo, nombre from MIEMBROFORMULARIO where IDFormulario="+idFormulario+";" );
+            while (resultado.next()) {
+                campos.add(resultado.getObject("correlativo").toString());
+                campos.add(resultado.getObject("nombre").toString());
+
+                }
+        } catch (SQLException e) {
+            System.out.println("*SQL Exception: *" + e.toString());
+        }
+
+
+
+
+
+
+        return campos;
+    }
     public abstract int guardaFormulario(String nombre, String descripcion);
 
     /**

@@ -193,8 +193,6 @@ public class frameComandos extends javax.swing.JFrame {
         comboCampoFinal = new javax.swing.JComboBox();
         labelCondFinal = new javax.swing.JLabel();
         fieldEfecto = new javax.swing.JTextField();
-        botonAgregarAccion = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
@@ -297,22 +295,6 @@ public class frameComandos extends javax.swing.JFrame {
 
         fieldEfecto.setName("textoPosterior"); // NOI18N
 
-        botonAgregarAccion.setText(resourceMap.getString("botonAgregarAccion.text")); // NOI18N
-        botonAgregarAccion.setName("botonAgregarAccion"); // NOI18N
-        botonAgregarAccion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAgregarAccionActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -356,13 +338,7 @@ public class frameComandos extends javax.swing.JFrame {
                         .addComponent(botonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
                         .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(jButton1)
-                        .addGap(98, 98, 98)
-                        .addComponent(botonAgregarAccion, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(67, 67, 67))))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(comboSeleccionFormulario, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -405,11 +381,7 @@ public class frameComandos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(fieldEfecto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fieldAccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonAgregarAccion)
-                    .addComponent(jButton1))
-                .addGap(72, 72, 72)
+                .addGap(173, 173, 173)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAceptar)
                     .addComponent(botonCancelar))
@@ -585,42 +557,6 @@ private void comboCampoFinalActionPerformed(java.awt.event.ActionEvent evt) {//G
 
 }//GEN-LAST:event_comboCampoFinalActionPerformed
 
-private void botonAgregarAccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarAccionActionPerformed
-    // TODO add your handling code here:
-        //String nombreFormulario = ((MiDato)this.comboSeleccionFormulario.getSelectedItem()).nombre;
-        //Se inicializan los campos del Comando
-
-        comandoActual.IDFormulario=((MiDato)this.comboSeleccionFormulario.getSelectedItem()).ID;
-        comandoActual.IDFormularioTrabajar=comandoActual.IDFormulario;//este no sé para que es, en el script del profe no se usa
-        comandoActual.descripcion=this.fieldDescripcion.getText();
-        comandoActual.nombreComando=this.fieldNombre.getText();
-        comandoActual.setTipoComando(this.comboTipo.getSelectedIndex() + 1);
-        comandoActual.conMascara=false;
-comandoActual.guardarComando();
-
-        if(ConMascara==1){
-            comandoActual.condicionInicial=fieldAccion.getText();
-            comandoActual.estadoFinal=fieldEfecto.getText();
-            comandoActual.tipoCampoInicial=((MiDato)comboCampoInicial.getSelectedItem()).nombre;
-            comandoActual.tipoCampoFinal=((MiDato)comboCampoFinal.getSelectedItem()).nombre;
-            comandoActual.IDComando=999;///Esto es lo unico que hace falta arreglar esto
-        }
-                comandoActual.conMascara=true;
-        comandoActual.guardarComando();
-
-}//GEN-LAST:event_botonAgregarAccionActionPerformed
-
-private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    if(ConMascara==0){
-        aparecerCamposConMascara();
-        ConMascara=1;
-    }
-    else{
-    ocultarCamposConMascara();
-        ConMascara=0;
-    }
-}//GEN-LAST:event_jButton1ActionPerformed
-
 private void ocultarCamposConMascara(){
     comboCampoInicial.setVisible(false);
     comboCampoFinal.setVisible(false);
@@ -685,7 +621,6 @@ ocultarCamposConMascara();    // TODO add your handling code here:
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAceptar;
-    private javax.swing.JButton botonAgregarAccion;
     private javax.swing.JButton botonCancelar;
     private javax.swing.JComboBox comboCampoFinal;
     private javax.swing.JComboBox comboCampoInicial;
@@ -695,7 +630,6 @@ ocultarCamposConMascara();    // TODO add your handling code here:
     private javax.swing.JTextField fieldDescripcion;
     private javax.swing.JTextField fieldEfecto;
     private javax.swing.JTextField fieldNombre;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel labelCampoFinal;
     private javax.swing.JLabel labelCampoInicial;
     private javax.swing.JLabel labelCondFinal;

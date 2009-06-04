@@ -461,24 +461,26 @@ public class frameComandos extends javax.swing.JFrame {
     // TODO add your handling code here:
         //String nombreFormulario = ((MiDato)this.comboSeleccionFormulario.getSelectedItem()).nombre;
         //Se inicializan los campos del Comando
-
+        int IDComandoAgregado=0;
         comandoActual.IDFormulario=((MiDato)this.comboSeleccionFormulario.getSelectedItem()).ID;
         comandoActual.IDFormularioTrabajar=comandoActual.IDFormulario;//este no sé para que es, en el script del profe no se usa
         comandoActual.descripcion=this.fieldDescripcion.getText();
         comandoActual.nombreComando=this.fieldNombre.getText();
         comandoActual.setTipoComando(this.comboTipo.getSelectedIndex() + 1);
         comandoActual.conMascara=false;
-comandoActual.guardarComando();
+        IDComandoAgregado=comandoActual.guardarComandoSinMascara();
 
         if(ConMascara==1){
             comandoActual.condicionInicial=fieldAccion.getText();
             comandoActual.estadoFinal=fieldEfecto.getText();
             comandoActual.tipoCampoInicial=((MiDato)comboCampoInicial.getSelectedItem()).nombre;
             comandoActual.tipoCampoFinal=((MiDato)comboCampoFinal.getSelectedItem()).nombre;
-            comandoActual.IDComando=999;///Esto es lo unico que hace falta arreglar esto
+            comandoActual.IDComando=IDComandoAgregado;///Esto es lo unico que hace falta arreglar esto
         }
-                comandoActual.conMascara=true;
-        comandoActual.guardarComando();
+
+        comandoActual.guardarComandoConMascara();
+                //comandoActual.conMascara=true;
+       // comandoActual.guardarComando();
   
         
         

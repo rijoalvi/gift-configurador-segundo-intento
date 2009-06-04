@@ -150,9 +150,24 @@ public class Comando  {
         return(this.facil);
     }
 
+
+
+    public int guardarComandoSinMascara(){
+            int IDComandoAgregado=0;
+            IDComandoAgregado = consultaComando.agregarComando(IDFormulario, nombreComando, descripcion, tipoComando , IDFormularioTrabajar,"fecha");
+            System.out.print("Comando sin máscara agregado");
+            return IDComandoAgregado;
+
+    }
+    public void guardarComandoConMascara(){
+        consultaComando.agregarComandoConMascara(IDComando, tipoCampoInicial, condicionInicial, tipoCampoFinal, estadoFinal);
+                      System.out.print("Comando con máscara agregado");
+    }
     public void guardarComando(){        
         if(!conMascara){
+
             this.IDComando = consultaComando.agregarComando(IDFormulario, nombreComando, descripcion, tipoComando , IDFormularioTrabajar,"fecha");
+
             System.out.print("Comando sin máscara agregado");
         }
         else{

@@ -439,7 +439,7 @@ public class frameComandos extends javax.swing.JFrame {
         comandoActual.descripcion=this.fieldDescripcion.getText();
         comandoActual.nombreComando=this.fieldNombre.getText();
         comandoActual.setTipoComando(this.comboTipo.getSelectedIndex() + 1);
-        comandoActual.conMascara=false;
+
         IDComandoAgregado=comandoActual.guardarComandoSinMascara();
 
         if(ConMascara==1){

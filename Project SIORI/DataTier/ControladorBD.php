@@ -13,7 +13,7 @@ class ControladorBD {
     private $user;
     private $password;
     private $database;   
-    private $result;
+    //private $result;
 
     public function ControladorBD(){
         $this->user="lucachac_user";
@@ -24,8 +24,8 @@ class ControladorBD {
     }
     public function hacerConsulta($query){
         //$query="select Carne, nombre, Apellido1, Apellido2, Sexo, Nacionalidad, Telefono, Provincia, Canton, PromedioAdmision from Estudiante where Carne='".$carne."';";
-        $this->result=mysql_query($query);
-        return $this->result;
+        $result=mysql_query($query);
+        return $result;
     }
 }
 ?>

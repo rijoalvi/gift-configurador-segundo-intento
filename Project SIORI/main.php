@@ -393,11 +393,11 @@ else{
 
 $query="select Carne, nombre, Apellido1, Apellido2, Sexo, Nacionalidad, Telefono, Provincia, Canton, PromedioAdmision from Estudiante where Carne='".$carne."';";
 
-include("DataTier/ControladorBD.php");
+include("BusinessLogic/Estudiante.php");
 //include ("Borbuja.class.php");
-$cccc = new ControladorBD();
+$estudiante = new Estudiante();
 
-
+$estudiante->set($carne);
 
 $result=mysql_query($query);
 
@@ -411,35 +411,36 @@ while ($i < $num) {
 	$colorList2[0][2]="";	
 	
 	$colorList2[1][0]="Nombre:";
-	$colorList2[1][1]=mysql_result($result,$i,"nombre");
+	//$colorList2[1][1]=mysql_result($result,$i,"nombre");
+    $colorList2[1][1]=$estudiante->nombre;
 	$colorList2[1][2]="";
 
 	$colorList2[2][0]="Apellido......... 1:";
-	$colorList2[2][1]=mysql_result($result,$i,"Apellido1");
+	$colorList2[2][1]=$estudiante->apellido1;
 	$colorList2[2][2]="";
 
 	$colorList2[3][0]="Apellido 2...........";
-	$colorList2[3][1]=mysql_result($result,$i,"Apellido2");
+	$colorList2[3][1]=$estudiante->apellido2;
 	$colorList2[3][2]="";
 
 	$colorList2[4][0]="Sexo";
-	$colorList2[4][1]=mysql_result($result,$i,"Sexo");
+	$colorList2[4][1]=$estudiante->sexo;
 	$colorList2[4][2]="";
 
 	$colorList2[5][0]="Nacionalidad:";
-	$colorList2[5][1]=mysql_result($result,$i,"Nacionalidad");
+	$colorList2[5][1]=$estudiante->nacionalidad;
 	$colorList2[5][2]="";
 	
 	$colorList2[6][0]="Teléfono:";
-	$colorList2[6][1]=mysql_result($result,$i,"Telefono");
+	$colorList2[6][1]=$estudiante->telefono;
 	$colorList2[6][2]="";
 
 	$colorList2[7][0]="Provincia:";
-	$colorList2[7][1]=mysql_result($result,$i,"Provincia");
+	$colorList2[7][1]=$estudiante->provincia;
 	$colorList2[7][2]="";
 	
 	$colorList2[8][0]="Cantón:";
-	$colorList2[8][1]=mysql_result($result,$i,"Canton");
+	$colorList2[8][1]=$estudiante->canton;
 	$colorList2[8][2]="";
 
 	$colorList2[9][0]="Prom. Admisión:";

@@ -436,7 +436,7 @@ while ($i < $num) {
 	$colorList2[6][2]="";
 
 	$colorList2[7][0]="Provincia:";
-	$colorList2[7][1]=$estudiante->provincia;
+	$colorList2[7][1]=$estudiante->provincia;  
 	$colorList2[7][2]="";
 	
 	$colorList2[8][0]="Cantón:";
